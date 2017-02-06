@@ -1,63 +1,75 @@
-const http = require('http');
-const https = require('https');
 const fs = require('fs');
 const path = require('path');
+if (fs.existsSync(`${__dirname}/config.js`)) {
+  const config = require('./config');
+  config.loadConfig();
+}
+
+const http = require('http');
+const https = require('https');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const config = require('./config');
 const router = require('./router');
+const hlpr = require('./lib/helpers');
 
 const app = express();
 const isSSL = fs.existsSync(`${__dirname}/../ssl/cert.pem`);
-const rootDir = `${__dirname}/${config.public}/`;
-const port = process.env.PORT || config.port;
+const rootDir = `${__dirname}/${process.env.SITE_PUBLIC}/`;
+const port = process.env.PORT;
 const portS = (port * 1) + 363;
-const hlpr = require('./lib/helpers');
+
 let httpServer;
 
-hlpr.isProd();
+// hlpr.consLog(['process.env', process.env]);
 
 isSSL ?
-  console.log('**** Using SSL certs') :
-  console.log('**** No SSL certs');
+  console.log('**** Using local SSL certs') :
+  console.log('**** No local SSL certs');
+  console.log(`**** CERT = ${process.env.CERT}`);
 
 // redirect if insecure and SSL
-if (isSSL) {
-  app.all(
-    '*', (req, res, next) => {
-      if (req.secure) {
-        return next();
-      }
-      res.redirect(`https://${req.hostname}:${portS}${req.url}`);
+const secureHost = (req, res, next) => {
+  if (!req.secure) {
+    if (isSSL) {
+      return res.redirect(`https://${req.hostname}:${portS}${req.url}`);
+    } else if (process.env.CERT === 'true' && req.get('x-forwarded-proto') !== 'https') {
+      return res.redirect(`https://${req.get('host')}${req.url}`);
     }
-  );
-}
+    return next();
+  }
+  return next();
+};
 
 // Webpack dev server setup
-if (!hlpr.isProd()) {
-  mongoose.connect(config.mongoconnect.dev);
+if (!hlpr.isProd() && process.env.NODE_ENV !== 'API-ONLY') {
   hlpr.consLog(['**** Using Webpack Dev Middleware']);
-  const test = process.argv[2] || false;
-
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
-  const webpackConfig = require('../../webpack.dev.config');
+  const webpackConfig = require('../../webpack.config');
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, {
     publicPath: webpackConfig.output.publicPath,
   }));
   app.use(webpackHotMiddleware(compiler));
-  app.use(morgan('combined'));
-} else {
-  // mongoose.connect(config.mongoconnect.prod);
+  // app.use(morgan('combined'));
 }
 
+mongoose.connect(process.env.MONGODB_URI, {
+  server: {
+    socketOptions: {
+      socketTimeoutMS: 300000,
+      connectionTimeout: 300000,
+    },
+  },
+});
+
 // Express Middleware
-app.use(cors());
+app.use(secureHost);
+// app.use(cors());
 // parses everything that comes in as JSON
 app.use(bodyParser.json({ type: '*/*' }));
 app.use(express.static(rootDir));

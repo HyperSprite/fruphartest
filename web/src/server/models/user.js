@@ -5,43 +5,42 @@ const bcrypt = require('bcrypt-nodejs');
 
 const Schema = mongoose.Schema;
 
-const tssGoalSchema = new Schema({
-  week_of: { type: String, unique: true }, // time string "2012-12-13T03:43:19Z"
-  tssGoal: Number, // User enters number.
-  weekFTP: Number, // get this number from User FTP when created,
-  trainingLog: String, // how did this week go?
-});
-
-const eventGoalSchema = new Schema({
-  eventId: ObjectId,
-  importance: String, // a race, b race, c race,
-  calendarLink: String, // URL to personal calendar
-  notes: String,
-});
-
 const userSchema = new Schema({
-  email: { type: String, unique: true, lowercase: true },
+  email: { type: String, lowercase: true },
   password: String,
-  stravaId: Number,
-  resource_state: Number,
+  userName: String, // for posting
+  accessToken: String,
+  resourceState: Number,
   firstname: String,
   lastname: String,
   profile_medium: String,
   profile: String,
-  city: String,
-  country: String,
+  locStreet: String,  // from user input
+  locCity: String,  // from user input
+  locState: String,  // from user input
+  locCountry: String,  // from user input
+  locZip: String,  // from user input
+  geoFormattedAddress: String,
+  geoCoordinates: { type: [Number], index: '2dsphere' }, // type: [lon,lat]
+  geoLongitude: Number,
+  geoLatitude: Number,
+  geoLevel1Long: String,
+  geoLevel2Long: String,
+  geoStreetNumber: String,
+  geoStreetName: String,
+  geoCity: String,
+  geoCountry: String,
+  geoCountryCode: String,
+  geoZipCode: String,
+  geoProvider: String,
+  locationPref: { type: String, enum: ['Manual', 'Magic'], default: 'Manual' },
   sex: String,
   premium: Boolean,
   created_at: String,
   updated_at: String,
-  athlete_type: Number,
   date_preference: String,
   measurement_preference: String,
-  ftp: Number,
-  weight: Number,
   week_start_day: Number, // 0 - Sun, 1 - Mon...
-  tssGoals: tssGoalSchema,
-  eventGoals: eventGoalSchema,
 });
 
 userSchema.pre('save', function userSchemaPre(next) {

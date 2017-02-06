@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Redirect, Link } from 'react-router';
+import { Redirect, Link } from 'react-router-dom';
 import Popout from 'react-popout';
 
 import { signinUser, ifToken } from '../../actions';
@@ -59,59 +59,39 @@ let Signin = class Signin extends Component {
         <Redirect to="/todos" />
       );
     }
-    if (this.state.isPoppedOut) {
-      return (
-        <Popout
-          url="/auth/strava"
-          title="Strava Auth"
-        >
-          <div
-            id="stravaCheck"
-          >
-            Checking with Strava
-            <button type="button" className="btn btn-default hiddenAuth" onClick={this.popoutContentClicked}>Save user</button>
-          </div>
-
-        </Popout>
-      );
-    } else {
-      return (
-        <div>
-          <form onSubmit={handleSubmit(this.handleFormSubmit)}>
-            <fieldset className="form-group">
-              <Field
-                component={Input}
-                label="Email:"
-                name="email"
-                type="email"
-                placeholder="Type your email"
-              />
-            </fieldset>
-            <fieldset className="form-group">
-              <Field
-                component={Input}
-                label="Password:"
-                name="password"
-                type="password"
-                placeholder="Type a password"
-              />
-            </fieldset>
-            { this.renderAlert() }
-            <button type="submit" className="btn btn-primary" disabled={pristine || submitting}>Submit</button>
-            <button type="button" className="btn btn-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-            <span>
-              {' or '}
-              <Link to="/signup">
-                {'Sign up!'}
-              </Link>
-            </span>
-          </form>
-          <div>
-            <button type="button" className="btn btn-default" onClick={this.popout}>Signin with Strava</button>
-          </div>
-        </div>
-      );
-    }
+    return (
+      <div>
+        <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+          <fieldset className="form-group">
+            <Field
+              component={Input}
+              label="Email:"
+              name="email"
+              type="email"
+              placeholder="Type your email"
+            />
+          </fieldset>
+          <fieldset className="form-group">
+            <Field
+              component={Input}
+              label="Password:"
+              name="password"
+              type="password"
+              placeholder="Type a password"
+            />
+          </fieldset>
+          { this.renderAlert() }
+          <button type="submit" className="btn btn-primary" disabled={pristine || submitting}>Submit</button>
+          <button type="button" className="btn btn-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+          <span>
+            {' or '}
+            <Link to="/signup">
+              {'Sign up!'}
+            </Link>
+          </span>
+        </form>
+      </div>
+    );
   }
 };
 

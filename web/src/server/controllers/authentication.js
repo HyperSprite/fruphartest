@@ -1,12 +1,11 @@
 const jwt = require('jwt-simple');
 
 const User = require('../models/user');
-const config = require('../config');
 const hlpr = require('../lib/helpers');
 
 function tokenForUser(user) {
   const timestamp = new Date().getTime();
-  const newJWT = jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
+  const newJWT = jwt.encode({ sub: user.id, iat: timestamp }, process.env.AUTH_SECRET);
   hlpr.consLog(['tokenForUser', newJWT]);
   return newJWT;
 }
@@ -21,17 +20,6 @@ exports.signin = (req, res, next) => {
   res.send({ token: tokenForUser(req.user) });
 };
 
-exports.stravaSignin = (req, res, next) => {
-  hlpr.consLog(['stravaSignin', `res.send signin token ${req.user}`]);
-  hlpr.consLog(['req', req.user.stravaId]);
-  const result = `
-      <script>
-        localStorage.setItem('token', '${tokenForUser(req.user)}');
-      </script>`;
-
-  res.send(result);
-};
-
 exports.signup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -42,7 +30,7 @@ exports.signup = (req, res, next) => {
   }
 
   User.findOne({ email: email }, (err, existingUser) => {
-    if (err) { return next(err); }
+    if (err) { hlpr.consLog(['user.findOne err', err]); return next(err); }
     if (existingUser) {
       hlpr.consLog(['signup', 'AUTH ERROR: Email in use']);
       return res.status(422).send({ error: 'Email is in use!' });
@@ -52,7 +40,7 @@ exports.signup = (req, res, next) => {
       password: password,
     });
     user.save((err) => {
-      if (err) { return next(err); }
+      if (err) { hlpr.consLog(['user.save err', err]); return next(err); }
       hlpr.consLog(['signup', 'AUTH SUCCESS: Token Sent']);
       res.json({ token: tokenForUser(user) });
     });

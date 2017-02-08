@@ -12,6 +12,7 @@ export type ActionStrings = (
   'TOGGLE_TODO' |
   'SET_VISIBILITY_FILTER' |
   'AUTH_USER' |
+  'AUTH_EDIT_USER' |
   'UNAUTH_USER' |
   'AUTH_ERROR' |
   'FETCH_DATA' |

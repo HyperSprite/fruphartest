@@ -1,21 +1,30 @@
 const mongoose = require('mongoose');
+
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const findOrCreate = require('mongoose-findorcreate');
 const bcrypt = require('bcrypt-nodejs');
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  email: { type: String, lowercase: true },
-  password: String,
-  userName: String, // for posting
-  accessToken: String,
-  resourceState: Number,
-  firstname: String,
-  lastname: String,
-  profile_medium: String,
-  profile: String,
+const enumPhones = [
+  'Direct',
+  'Main',
+  'Mobile',
+  'Work',
+  'Home',
+  'Other',
+];
+
+const enumAddress = [
+  'Home',
+  'Office',
+  'Other',
+];
+
+const userAddressSchema = new Schema({
+  locType: { type: String, enum: enumAddress, default: 'Home' },
   locStreet: String,  // from user input
+  locStreet2: String, // from user input
   locCity: String,  // from user input
   locState: String,  // from user input
   locCountry: String,  // from user input
@@ -33,15 +42,34 @@ const userSchema = new Schema({
   geoCountryCode: String,
   geoZipCode: String,
   geoProvider: String,
-  locationPref: { type: String, enum: ['Manual', 'Magic'], default: 'Manual' },
-  sex: String,
-  premium: Boolean,
-  created_at: String,
-  updated_at: String,
-  date_preference: String,
-  measurement_preference: String,
-  week_start_day: Number, // 0 - Sun, 1 - Mon...
 });
+
+const userPhoneNumbers = new Schema({
+  phoneType: { type: String, enum: enumPhones, default: 'Mobile' },
+  phoneNumber: String,
+});
+
+const userSchema = new Schema({
+  email: { type: String, lowercase: true },
+  password: String,
+  userName: String, // for posting
+  accessToken: String,
+  resourceState: Number,
+  firstname: String,
+  lastname: String,
+  profileMedium: String,
+  profile: String,
+  locationPref: { type: String, enum: ['Manual', 'Magic'], default: 'Manual' },
+  premium: Boolean,
+  datePreference: String,
+  measurementPreference: String,
+  weekStartDay: Number, // 0 - Sun, 1 - Mon...
+  addresses: [userAddressSchema],
+  phoneNumbers: [userPhoneNumbers],
+},
+  {
+    timestamps: true,
+  });
 
 userSchema.pre('save', function userSchemaPre(next) {
   const user = this;

@@ -56,7 +56,7 @@ let Signin = class Signin extends Component {
 
     if (authenticated) {
       return (
-        <Redirect to="/todos" />
+        <Redirect to="/about" />
       );
     }
     return (

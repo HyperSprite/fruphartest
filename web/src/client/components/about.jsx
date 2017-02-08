@@ -1,222 +1,179 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Link, Redirect } from 'react-router-dom';
+import { Field, FieldArray, reduxForm } from 'redux-form';
 import * as actions from './../actions';
 
+import Alert from './form/alert';
 import Input from './form/input';
+import PhoneNumbers from './form/phone-numbers';
+import Addresses from './form/addresses';
 
-class About extends Component {
-  componentWillMount() {
+const relURL = '/auth/edituser';
+
+const propTypes = {
+  initialValues: PropTypes.object,
+};
+
+let UserData = class UserData extends Component {
+  constructor() {
+    super();
+
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.cancelFormEdit = this.cancelFormEdit.bind(this);
+  }
+
+  componentDidMount() {
     this.props.fetchMessage();
     this.props.fetchData('auth/user');
   }
 
+  handleFormSubmit(formProps) {
+    this.props.postForm(formProps, `${relURL}`, 'AUTH_EDIT_USER');
+  }
+
+  cancelFormEdit() {
+    // this.props.cancelEdit();
+    () => <Redirect to="/home" />;
+  }
+
+  renderAlert() {
+    const { errorMessage } = this.props;
+    return (errorMessage) ? (
+      Object.keys(errorMessage).map(key => errorMessage[key]).map((eM) => {
+        return Alert(eM.path, 'Opps', eM.message);
+      })
+    ) : (
+      null
+    );
+  }
+
   render() {
+    const {
+      authenticated,
+      handleSubmit,
+      initialValues,
+      postSuccess,
+      pristine,
+      reset,
+      submitting,
+    } = this.props;
+
+    if (!authenticated) {
+      return (
+        <Redirect to="/signin" />
+      );
+    }
+
+    if (postSuccess) {
+      return (
+        <Redirect to="/home" />
+      );
+    }
+
     return (
       <div>
         <h1>About</h1>
         <p>{'This is an about page. :)'}</p>
         <h2>{ this.props.message }</h2>
         <p>{ this.props.email }</p>
-        <p>{ this.props.stravaId }</p>
-        <form>
+        <form onSubmit={handleSubmit(this.handleFormSubmit)}>
           <fieldset className="form-group">
             <Field
               component={Input}
-              label="email:"
-              name="email"
-              type="email"
-              value={this.props.email}
+              label="User Name:"
+              name="userName"
+              type="text"
             />
           </fieldset>
           <fieldset className="form-group">
             <Field
               component={Input}
-              label="stravaId:"
-              name="stravaId"
-              type="stravaId"
-              value={this.props.stravaId}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <Field
-              component={Input}
-              label="resource_state:"
-              name="resource_state"
-              type="resource_state"
-              value={this.props.resource_state}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <Field
-              component={Input}
-              label="firstname:"
+              label="First Name:"
               name="firstname"
-              type="firstname"
-              value={this.props.firstname}
+              type="text"
             />
           </fieldset>
           <fieldset className="form-group">
             <Field
               component={Input}
-              label="lastname:"
+              label="Last Name:"
               name="lastname"
-              type="lastname"
-              value={this.props.lastname}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-          <Field
-              component={Input}
-              label="profile_medium:"
-              name="profile_medium"
-              type="profile_medium"
-              value={this.props.profile_medium}
+              type="text"
             />
           </fieldset>
           <fieldset className="form-group">
             <Field
               component={Input}
-              label="profile:"
+              label="Profile Image:"
               name="profile"
-              type="profile"
-              value={this.props.profile}
+              type="url"
             />
           </fieldset>
           <fieldset className="form-group">
             <Field
               component={Input}
-              label="city:"
-              name="city"
-              type="city"
-              value={this.props.city}
+              label="Set Location Preference:"
+              name="locationPref"
+              type="text"
             />
           </fieldset>
           <fieldset className="form-group">
-            <Field
-              component={Input}
-              label="country:"
-              name="country"
-              type="country"
-              value={this.props.country}
+            <FieldArray
+              name="addresses"
+              component={Addresses}
             />
           </fieldset>
           <fieldset className="form-group">
-            <Field
-              component={Input}
-              label="sex:"
-              name="sex"
-              type="sex"
-              value={this.props.sex}
+            <FieldArray
+              name="phoneNumbers"
+              component={PhoneNumbers}
             />
           </fieldset>
-          <fieldset className="form-group">
-            <Field
-              component={Input}
-              label="premium:"
-              name="premium"
-              type="premium"
-              value={this.props.premium}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <Field
-              component={Input}
-              label="created_at:"
-              name="created_at"
-              type="created_at"
-              value={this.props.created_at}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <Field
-              component={Input}
-              label="updated_at:"
-              name="updated_at"
-              type="updated_at"
-              value={this.props.updated_at}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <Field
-              component={Input}
-              label="athlete_type:"
-              name="athlete_type"
-              type="athlete_type"
-              value={this.props.athlete_type}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <Field
-              component={Input}
-              label="date_preference:"
-              name="date_preference"
-              type="date_preference"
-              value={this.props.date_preference}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <Field
-              component={Input}
-              label="measurement_preference:"
-              name="measurement_preference"
-              type="measurement_preference"
-              value={this.props.measurement_preference}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <Field
-              component={Input}
-              label="ftp:"
-              name="ftp"
-              type="ftp"
-              value={this.props.ftp}
-            />
-          </fieldset>
-          <fieldset className="form-group">
-            <Field
-              component={Input}
-              label="weight:"
-              name="weight"
-              type="weight"
-              value={this.props.weight}
-            />
-          </fieldset>
+          { this.renderAlert() }
+          <div>
+            <button
+              type="submit"
+              disabled={pristine || submitting}
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              disabled={pristine || submitting}
+              onClick={reset}
+            >
+              Clear Values
+            </button>
+            <Link
+              to="/home"
+            >
+              <button>
+                Cancel
+              </button>
+            </Link>
+          </div>
         </form>
       </div>
     );
   }
-}
+};
 
 function mapStateToProps(state) {
-
+  const initialValues = state.auth.user;
   return {
+    authenticated: state.auth.authenticated,
     message: state.auth.message,
-    email: state.auth.user.email,
-    stravaId: state.auth.user.stravaId,
-    resource_state: state.auth.user.resource_state,
-    firstname: state.auth.user.firstname,
-    lastname: state.auth.user.lastname,
-    profile_medium: state.auth.user.profile_medium,
-    profile: state.auth.user.profile,
-    city: state.auth.user.city,
-    country: state.auth.user.country,
-    sex: state.auth.user.sex,
-    premium: state.auth.user.premium,
-    created_at: state.auth.user.created_at,
-    updated_at: state.auth.user.updated_at,
-    athlete_type: state.auth.user.athlete_type,
-    date_preference: state.auth.user.date_preference,
-    measurement_preference: state.auth.user.measurement_preference,
-    ftp: state.auth.user.ftp,
-    weight: state.auth.user.weight,
+    initialValues,
   };
 }
 
+UserData = reduxForm({
+  form: 'userdata',
+  enableReinitialize: true,
+  // validate,
+})(UserData);
 
+UserData.propTypes = propTypes;
 
-About = reduxForm({
-  form: 'about',
-})(About);
-
-export default connect(mapStateToProps, actions)(About);
+export default connect(mapStateToProps, actions)(UserData);

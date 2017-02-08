@@ -14,6 +14,7 @@ export const TYPES: {[key: ActionStrings]: ActionStrings} = {
   TOGGLE_TODO: 'TOGGLE_TODO',
   SET_VISIBILITY_FILTER: 'SET_VISIBILITY_FILTER',
   AUTH_USER: 'AUTH_USER',
+  AUTH_EDIT_USER: 'AUTH_EDIT_USER',
   UNAUTH_USER: 'UNAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
   FETCH_DATA: 'FETCH_DATA',
@@ -64,6 +65,36 @@ export function ifToken() {
     };
   }
 }
+
+export function postForm(formProps, relURL, postType) {
+  const axiosConfig = {
+    headers: {
+      authorization: localStorage.getItem('token'),
+    },
+  };
+  return (dispatch) => {
+    axios.post(relURL, formProps, axiosConfig)
+      .then((response) => {
+        switch (postType) {
+          case TYPES.AUTH_EDIT_USER:
+            dispatch({
+              type: TYPES.AUTH_EDIT_USER,
+              payload: response,
+            });
+            break;
+          default:
+        }
+      })
+      .catch((error) => {
+        dispatch({
+          type: TYPES.FETCH_DATA,
+          payload: error.data,
+        });
+      });
+  };
+}
+
+
 
 export function fetchMessage() {
   return (dispatch) => {

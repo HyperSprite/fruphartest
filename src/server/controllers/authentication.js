@@ -1,4 +1,5 @@
 const jwt = require('jwt-simple');
+const form = require('express-form');
 
 const User = require('../models/user');
 const hlpr = require('../lib/helpers');
@@ -9,6 +10,11 @@ function tokenForUser(user) {
   hlpr.consLog(['tokenForUser', newJWT]);
   return newJWT;
 }
+
+// Form validation middleware
+exports.userForm = form(
+  form.field('userName').array().custom(value => value.replace(/[^a-z0-9-_]/gi, '')) /* eslint comma-dangle: ["error", "never"] */
+);
 
 exports.signinError = (err, req, res, next) => {
   hlpr.consLog(['signin', `AUTH ERROR: Signin - Bad Email or Password @ ${req.ip}`]);
@@ -47,8 +53,31 @@ exports.signup = (req, res, next) => {
   });
 };
 
+exports.edituser = (req, res, next) => {
+  const rQB = req.body;
+  const options = {
+    new: true, projection: { password: 0 }
+  }
+  hlpr.consLog(['auth.edituser', req.body, req.user]);
+  User.findByIdAndUpdate(req.user._id, rQB, options, (err, user) => {
+    if (err || !user) {
+      hlpr.consLog(['auth.edituser err', err]);
+      res.status(401).send({ error: 'User not found' });
+    }
+    hlpr.consLog(['auth.edituser user', user]);
+    const data = {
+      type: 'AUTH_EDIT_USER',
+      message: 'Informatoin Updated!',
+      auth: {
+        user: user
+      }
+    };
+    res.send(data);
+  });
+};
+
 exports.user = (req, res, next) => {
-  User.findOne({ $or: [{ email: req.user.email },{ stravaId: req.user.stravaId }] }, (err, user) => {
+  User.findOne({ $or: [{ email: req.user.email }] }, (err, user) => {
     if (err) { return next(err); }
     if (user) {
       hlpr.consLog(['auth-user', 'AUTH USER: User found', user.email]);

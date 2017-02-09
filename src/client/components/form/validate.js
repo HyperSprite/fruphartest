@@ -13,6 +13,9 @@ const validate = (formProps) => {
   } else if (formProps.password !== formProps.passwordConfirm) {
     errors.passwordConfirm = 'Passwords must match';
   }
+  if (!formProps.firstname) {
+    errors.firstname = 'Required';
+  }
   return errors;
 };
 

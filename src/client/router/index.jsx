@@ -8,7 +8,8 @@ import Signin from './../components/auth/signin';
 import Signup from './../components/auth/signup';
 import Signout from './../components/auth/signout';
 import Todos from './../components/todos';
-import About from './../components/about';
+import UserProfile from './../components/auth/user-profile';
+import UserWizard from './../components/auth/user-wizard';
 
 const router = (
   <Switch>
@@ -17,7 +18,8 @@ const router = (
     <Route path="/signup" component={Signup} />
     <Route path="/signout" component={Signout} />
     <RouteAuthorized path="/todos" component={Todos} />
-    <RouteAuthorized path="/about" component={About} />
+    <RouteAuthorized path="/user-profile" component={UserProfile} />
+    <RouteAuthorized path="/user-wizard" component={UserWizard} />
   </Switch>
 );
 

@@ -2,12 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { Field, FieldArray, reduxForm } from 'redux-form';
-import * as actions from './../actions';
+import * as actions from '../../actions';
 
-import Alert from './form/alert';
-import Input from './form/input';
-import PhoneNumbers from './form/phone-numbers';
-import Addresses from './form/addresses';
+import Alert from '../form/alert';
+import Input from '../form/input';
+import PhoneNumbers from '../form/phone-numbers';
+import Addresses from '../form/addresses';
 
 const relURL = '/auth/edituser';
 
@@ -73,8 +73,7 @@ let UserData = class UserData extends Component {
 
     return (
       <div>
-        <h1>About</h1>
-        <p>{'This is an about page. :)'}</p>
+        <h1>User Profile</h1>
         <h2>{ this.props.message }</h2>
         <p>{ this.props.email }</p>
         <form onSubmit={handleSubmit(this.handleFormSubmit)}>
@@ -145,9 +144,7 @@ let UserData = class UserData extends Component {
             >
               Clear Values
             </button>
-            <Link
-              to="/home"
-            >
+            <Link to="/home">
               <button>
                 Cancel
               </button>

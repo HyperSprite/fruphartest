@@ -3,14 +3,32 @@ import React, { PropTypes } from 'react';
 import './styles.css';
 
 const propTypes = {
-  input: PropTypes.object,
-  label: PropTypes.string,
-  type: PropTypes.string,
+  input: PropTypes.object.isRequired,
+  label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
+  shouldFocus: PropTypes.bool,
+  type: PropTypes.string.isRequired,
   meta: PropTypes.object,
 };
 
-const renderInput = ({ input, label, placeholder, type, meta: { touched, error, warning } }) => (
+const defaultProps = {
+  placeholder: '',
+  shouldFocus: false,
+  meta: null,
+};
+
+const renderInput = ({
+  input,
+  label,
+  placeholder,
+  shouldFocus,
+  type,
+  meta: {
+    touched,
+    error,
+    warning,
+  },
+}) => (
   <div>
     <label
       htmlFor={input}
@@ -18,7 +36,7 @@ const renderInput = ({ input, label, placeholder, type, meta: { touched, error, 
       {label}
     </label>
     <div>
-      <input className="form-control" {...input} placeholder={placeholder} type={type} />
+      <input className="form-control" {...input} placeholder={placeholder} type={type} autoFocus={shouldFocus} />
       {touched && (
         (error && <div className="form-error">{error}</div>) || (warning && <div className="form-warning">{warning}</div>)
       )}
@@ -27,5 +45,6 @@ const renderInput = ({ input, label, placeholder, type, meta: { touched, error, 
 );
 
 renderInput.propTypes = propTypes;
+renderInput.defaultProps = defaultProps;
 
 export default renderInput;

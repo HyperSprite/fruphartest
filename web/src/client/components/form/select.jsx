@@ -5,13 +5,14 @@ import './styles.css';
 const propTypes = {
   input: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
+  shouldFocus: PropTypes.bool,
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  options: PropTypes.array.isRequired,
   meta: PropTypes.object,
 };
 
-const renderInput = ({ input, label, placeholder, type, options, meta: { touched, error, warning } }) => (
+const renderInput = ({ input, label, options, placeholder, shouldFocus, type, meta: { touched, error, warning } }) => (
   <div>
     <label
       htmlFor={input}
@@ -24,6 +25,7 @@ const renderInput = ({ input, label, placeholder, type, options, meta: { touched
         {...input}
         placeholder={placeholder}
         type={type}
+        autoFocus={shouldFocus}
       >
         <option />
         {options.map(t => <option key={t} value={t}>{t}</option>)}

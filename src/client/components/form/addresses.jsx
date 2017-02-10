@@ -18,7 +18,7 @@ const renderAddresses = ({ fields }) => (
   <ul>
     {fields.map((aD, index) =>
       <li
-        key={`${index}${aD.locStreet}`}
+        key={`${aD.locStreet}`}
       >
         <div>
           <Field
@@ -27,6 +27,7 @@ const renderAddresses = ({ fields }) => (
             component={Select}
             label="Type"
             options={enumAddress}
+            shouldFocus
           />
           <Field
             name={`${aD}.locStreet`}
@@ -80,6 +81,7 @@ const renderAddresses = ({ fields }) => (
       <button
         type="button"
         onClick={() => fields.push()}
+        autoFocus
       >
         Add Address
       </button>

@@ -16,26 +16,26 @@ const enumPhones = [
   'Other',
 ];
 
-
 const renderPhoneNumbers = ({ fields }) => (
   <ul>
     {fields.map((pN, index) =>
       <li
-        key={`${index}${pN.phoneNumber}`}
+        key={`${pN}.phoneNumber`}
       >
         <div>
-          <Field
-            name={`${pN}.phoneNumber`}
-            type="text"
-            component={Input}
-            label="Phone Number"
-          />
           <Field
             name={`${pN}.phoneType`}
             type="text"
             component={Select}
             label="Type"
             options={enumPhones}
+            shouldFocus
+          />
+          <Field
+            name={`${pN}.phoneNumber`}
+            type="text"
+            component={Input}
+            label="Phone Number"
           />
           <div>
             <button
@@ -53,6 +53,7 @@ const renderPhoneNumbers = ({ fields }) => (
       <button
         type="button"
         onClick={() => fields.push()}
+        autoFocus
       >
         Add Phone Number
       </button>

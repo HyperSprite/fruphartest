@@ -9,16 +9,24 @@ import PhoneNumbers from '../../form/phone-numbers';
 import validate from '../../form/validate';
 
 const UserWizardPage = (props) => {
-  const { handleSubmit } = props
+  const { handleSubmit, previousPage } = props
   return (
     <form onSubmit={handleSubmit}>
       <fieldset className="form-group">
         <FieldArray
           name="addresses"
           component={Addresses}
+          shouldFocus
         />
       </fieldset>
       <div>
+        <button
+          type="button"
+          className="previous"
+          onClick={previousPage}
+        >
+          Previous
+        </button>
         <button
           type="submit"
           className="next"

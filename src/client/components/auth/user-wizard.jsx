@@ -100,13 +100,14 @@ let UserWizard = class UserWizard extends Component {
         <h1>User Profile</h1>
         <h2>{ this.props.message }</h2>
         <p>{ this.props.email }</p>
-        { page === 1 && <UserWizardPage01 renderAlert={this.renderAlert()} onSubmit={this.nextPage} />}
-        { page === 2 && <UserWizardPage02 renderAlert={this.renderAlert()} onSubmit={this.nextPage} />}
-        { page === 3 && <UserWizardPage03 renderAlert={this.renderAlert()} onSubmit={this.nextPage} />}
-        { page === 4 && <UserWizardPage04 renderAlert={this.renderAlert()} onSubmit={this.nextPage} />}
-        { page === 5 && <UserWizardPage05 renderAlert={this.renderAlert()} onSubmit={this.nextPage} />}
-        { page === 6 && <UserWizardPage06 renderAlert={this.renderAlert()} onSubmit={this.nextPage} />}
-        { page === 7 && <UserWizardPageLast previousPage={this.previousPage} renderAlert={this.renderAlert()} onSubmit={handleSubmit(this.handleFormSubmit)} />}
+        { page === 1 && <UserWizardPage01 onSubmit={this.nextPage} />}
+        { page === 2 && <UserWizardPage02 previousPage={this.previousPage} onSubmit={this.nextPage} />}
+        { page === 3 && <UserWizardPage03 previousPage={this.previousPage} onSubmit={this.nextPage} />}
+        { page === 4 && <UserWizardPage04 previousPage={this.previousPage} onSubmit={this.nextPage} />}
+        { page === 5 && <UserWizardPage05 previousPage={this.previousPage} onSubmit={this.nextPage} />}
+        { page === 6 && <UserWizardPage06 previousPage={this.previousPage} onSubmit={this.nextPage} />}
+        { page === 7 && <UserWizardPageLast previousPage={this.previousPage} onSubmit={handleSubmit(this.handleFormSubmit)} />}
+        { this.renderAlert() }
       </div>
     );
   }

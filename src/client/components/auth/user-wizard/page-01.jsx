@@ -1,11 +1,8 @@
 import React from 'react';
-import { Field, FieldArray, reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import * as actions from '../../../actions';
 
-import Addresses from '../../form/addresses';
-import Alert from '../../form/alert';
 import Input from '../../form/input';
-import PhoneNumbers from '../../form/phone-numbers';
 import validate from '../../form/validate';
 
 const UserWizardPage = (props) => {
@@ -18,9 +15,9 @@ const UserWizardPage = (props) => {
           label="First Name:"
           name="firstname"
           type="text"
+          shouldFocus
         />
       </fieldset>
-      {/* { renderAlert() } */}
       <div>
         <button
           type="submit"

@@ -19,6 +19,8 @@ export const TYPES: {[key: ActionStrings]: ActionStrings} = {
   AUTH_ERROR: 'AUTH_ERROR',
   FETCH_DATA: 'FETCH_DATA',
   FETCH_JSON: 'FETCH_JSON',
+  PAGE_TRANSITION_FALSE: 'PAGE_TRANSITION_FALSE',
+  PAGE_TRANSITION_TRUE: 'PAGE_TRANSITION_TRUE',
 };
 
 // handle error mesages
@@ -94,6 +96,9 @@ export function postForm(formProps, relURL, postType) {
   };
 }
 
+export function pageTransitionFalse () {
+  return (dispatch) => dispatch({ type: TYPES.PAGE_TRANSITION_FALSE });
+}
 
 
 export function fetchMessage() {

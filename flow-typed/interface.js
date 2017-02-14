@@ -18,5 +18,6 @@ export type ActionStrings = (
   'FETCH_DATA' |
   'FETCH_JSON' |
   'SET_USER' |
-  'SET_TSS_GOAL'
+  'PAGE_TRANSITION_FALSE' |
+  'PAGE_TRANSITION_TRUE'
   )

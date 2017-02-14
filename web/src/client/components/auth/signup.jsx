@@ -31,7 +31,7 @@ let Signup = class Signup extends Component {
 
     if (authenticated) {
       return (
-        <Redirect to="/todos" />
+        <Redirect to="/user-wizard" />
       );
     }
     return (
@@ -43,6 +43,7 @@ let Signup = class Signup extends Component {
             name="email"
             type="email"
             placeholder="Type your email"
+            shouldFocus
           />
         </fieldset>
         <fieldset className="form-group">

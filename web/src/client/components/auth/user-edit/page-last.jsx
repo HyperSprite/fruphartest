@@ -8,31 +8,30 @@ import Input from '../../form/input';
 import PhoneNumbers from '../../form/phone-numbers';
 import validate from '../../form/validate';
 
-const UserWizardPage = (props) => {
-  const { handleSubmit, previousPage } = props
+const UserWizardPageLast = (props) => {
+  const { handleSubmit, pristine, previousPage, submitting,  auxButton, auxButtonLabel, submitLabel } = props
   return (
     <form onSubmit={handleSubmit}>
-      <fieldset className="form-group">
-        <FieldArray
-          name="addresses"
-          component={Addresses}
-          shouldFocus
-        />
-      </fieldset>
+      {/* { renderAlert() } */}
       <div>
-        <button
-          type="button"
-          className="previous"
-          onClick={previousPage}
-        >
-          Previous
-        </button>
+        {(auxButtonLabel) ? (
+          <button
+            type="button"
+            className="previous"
+            onClick={auxButton}
+          >
+            {auxButtonLabel}
+          </button>
+        ) : null}
         <button
           type="submit"
-          className="next"
+          disabled={pristine || submitting}
         >
-          Next
+          Submit
         </button>
+          <button>
+            Cancel
+          </button>
       </div>
     </form>
   );
@@ -42,4 +41,4 @@ export default reduxForm({
   form: 'userdata',
   destroyOnUnmount: false,
   validate,
-})(UserWizardPage);
+})(UserWizardPageLast);

@@ -59,7 +59,7 @@ const userSchema = new Schema({
   lastname: String,
   profileMedium: String,
   profile: String,
-  locationPref: { type: String, enum: ['Manual', 'Magic'], default: 'Manual' },
+  locationPref: Boolean,
   premium: Boolean,
   datePreference: String,
   measurementPreference: String,

@@ -1,24 +1,22 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
-import { Field, FieldArray, reduxForm } from 'redux-form';
+import { Redirect } from 'react-router-dom';
+import { formValueSelector, reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 
-import Addresses from '../form/addresses';
+import formValues from './form-values';
 import Alert from '../form/alert';
-import Input from '../form/input';
-import PhoneNumbers from '../form/phone-numbers';
 import validate from '../form/validate';
-
-import UserWizardPage01 from './user-wizard/page-01';
-import UserWizardPage02 from './user-wizard/page-02';
-import UserWizardPage03 from './user-wizard/page-03';
-import UserWizardPage04 from './user-wizard/page-04';
-import UserWizardPage05 from './user-wizard/page-05';
-import UserWizardPage06 from './user-wizard/page-06';
-import UserWizardPageLast from './user-wizard/page-last';
+import UserViewStatic from './user-view/static';
+import UserViewPhone from './user-view/static-phonenumbers';
+import UserViewAddresses from './user-view/static-addresses';
+import UserEditInput from './user-edit/input';
+import UserEditArray from './user-edit/input-array';
+import UserEditPageLast from './user-edit/page-last';
 
 const relURL = '/auth/edituser';
+
+const selector = formValueSelector('userdata');
 
 const propTypes = {
   initialValues: PropTypes.object,
@@ -39,6 +37,10 @@ let UserWizard = class UserWizard extends Component {
     this.props.fetchData('auth/user');
   }
 
+  componentWillUnmount() {
+    this.props.pageTransitionFalse();
+  }
+
   handleFormSubmit(formProps) {
     this.props.postForm(formProps, `${relURL}`, 'AUTH_EDIT_USER');
   }
@@ -49,11 +51,11 @@ let UserWizard = class UserWizard extends Component {
   }
 
   nextPage() {
-    this.setState({ page: this.state.page + 1 })
+    this.setState({ page: this.state.page + 1 });
   }
 
   previousPage() {
-    this.setState({ page: this.state.page - 1 })
+    this.setState({ page: this.state.page - 1 });
   }
 
   renderAlert() {
@@ -70,13 +72,17 @@ let UserWizard = class UserWizard extends Component {
   render() {
     const {
       authenticated,
+      eventSelector,
+      fields,
       handleSubmit,
+      handleTransition,
       initialValues,
       onSubmit,
       postSuccess,
       pristine,
       reset,
       submitting,
+      transitionPage,
     } = this.props;
 
     const {
@@ -89,7 +95,7 @@ let UserWizard = class UserWizard extends Component {
       );
     }
 
-    if (postSuccess) {
+    if (transitionPage) {
       return (
         <Redirect to="/home" />
       );
@@ -97,16 +103,22 @@ let UserWizard = class UserWizard extends Component {
 
     return (
       <div>
-        <h1>User Profile</h1>
-        <h2>{ this.props.message }</h2>
-        <p>{ this.props.email }</p>
-        { page === 1 && <UserWizardPage01 onSubmit={this.nextPage} />}
-        { page === 2 && <UserWizardPage02 previousPage={this.previousPage} onSubmit={this.nextPage} />}
-        { page === 3 && <UserWizardPage03 previousPage={this.previousPage} onSubmit={this.nextPage} />}
-        { page === 4 && <UserWizardPage04 previousPage={this.previousPage} onSubmit={this.nextPage} />}
-        { page === 5 && <UserWizardPage05 previousPage={this.previousPage} onSubmit={this.nextPage} />}
-        { page === 6 && <UserWizardPage06 previousPage={this.previousPage} onSubmit={this.nextPage} />}
-        { page === 7 && <UserWizardPageLast previousPage={this.previousPage} onSubmit={handleSubmit(this.handleFormSubmit)} />}
+        <h1>Let's get some more informatoin...</h1>
+        { page > 1 && <UserViewStatic content={eventSelector.firstname} formValues={formValues.firstname} />}
+        { page > 2 && <UserViewStatic content={eventSelector.lastname} formValues={formValues.lastname} />}
+        { page > 3 && <UserViewStatic content={eventSelector.profile} formValues={formValues.profile} />}
+        { page > 4 && <UserViewStatic content={eventSelector.locationPref} formValues={formValues.locationPref} />}
+        { page > 5 && <UserViewPhone content={eventSelector.phoneNumbers} formValues={formValues.phoneNumbers} />}
+        { page > 6 && <UserViewAddresses content={eventSelector.addresses} formValues={formValues.addresses} />}
+        { page > 7 && <UserViewStatic content={eventSelector.userName} formValues={formValues.userName} />}
+        { page === 1 && <UserEditInput content={eventSelector.firstname} formValues={formValues.firstname} onSubmit={this.nextPage} submitLabel="Next" />}
+        { page === 2 && <UserEditInput content={eventSelector.lastname} formValues={formValues.lastname} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
+        { page === 3 && <UserEditInput content={eventSelector.profile} formValues={formValues.profile} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
+        { page === 4 && <UserEditInput content={eventSelector.locationPref} formValues={formValues.locationPref} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
+        { page === 5 && <UserEditArray content={eventSelector.phoneNumbers} formValues={formValues.phoneNumbers} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
+        { page === 6 && <UserEditArray content={eventSelector.addresses} formValues={formValues.addresses} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
+        { page === 7 && <UserEditInput content={eventSelector.userName} formValues={formValues.userName} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
+        { page === 8 && <UserEditPageLast auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={handleSubmit(this.handleFormSubmit)} />}
         { this.renderAlert() }
       </div>
     );
@@ -115,10 +127,13 @@ let UserWizard = class UserWizard extends Component {
 
 function mapStateToProps(state) {
   const initialValues = state.auth.user;
+  const transitionPage = false;
   return {
     authenticated: state.auth.authenticated,
     message: state.auth.message,
+    transitionPage: state.page.transitionPage,
     initialValues,
+    eventSelector: selector(state, 'firstname', 'lastname', 'profile', 'locationPref', 'phoneNumbers', 'addresses', 'userName'),
   };
 }
 

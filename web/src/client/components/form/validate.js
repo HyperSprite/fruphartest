@@ -16,6 +16,12 @@ const validate = (formProps) => {
   if (!formProps.firstname) {
     errors.firstname = 'Required';
   }
+  if (!formProps.lastname) {
+    errors.lastname = 'Required';
+  }
+  // if (!formProps.phoneNumbers.phoneNumber) {
+  //   errors.phoneNumbers = 'Required';
+  // }
   return errors;
 };
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
+import { Button } from 'react-bootstrap';
+
 import * as actions from '../../../actions';
 
 import Addresses from '../../form/addresses';
@@ -15,23 +17,23 @@ const UserWizardPageLast = (props) => {
       {/* { renderAlert() } */}
       <div>
         {(auxButtonLabel) ? (
-          <button
+          <Button
             type="button"
             className="previous"
             onClick={auxButton}
           >
             {auxButtonLabel}
-          </button>
+          </Button>
         ) : null}
-        <button
+        <Button
           type="submit"
           disabled={pristine || submitting}
         >
           Submit
-        </button>
-          <button>
+        </Button>
+          <Button>
             Cancel
-          </button>
+          </Button>
       </div>
     </form>
   );

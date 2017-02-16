@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
+
 import { addTodo } from '../actions';
 
 const propTypes = {
@@ -26,9 +28,9 @@ let AddTodo = ({ dispatch }) => {
             input = node;
           }}
         />
-        <button type="submit">
+        <Button type="submit">
           Add Todo
-        </button>
+        </Button>
       </form>
     </div>
   );

@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,500');
+@import url('./bootstrap-colors.css');
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: #fefefe;
+  color: #13254B;
+}
+
+.inline-next > div > label {
+  display: inline;
+  margin: 1em;
+  padding-top: 0.1em;
+  line-height: 3em;
+}
+
+.inline-next > div > div {
+  display: inline;
+}

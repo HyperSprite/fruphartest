@@ -69,7 +69,6 @@ let Signin = class Signin extends Component {
               name="email"
               type="email"
               placeholder="Type your email"
-              shouldFocus
             />
           </fieldset>
           <fieldset className="form-group">

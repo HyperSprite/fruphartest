@@ -1,5 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Button, Col, ControlLabel, Form, FormControl, FormGroup, Row } from 'react-bootstrap';
+
 import * as actions from '../../../actions';
 
 import validate from '../../form/validate';
@@ -15,17 +17,8 @@ const UserWizardPage = (props) => {
     component,
   } = formValues;
   return (
-    <form onSubmit={handleSubmit}>
-      {(auxButtonLabel) ? (
-        <button
-          type="button"
-          className="previous"
-          onClick={auxButton}
-        >
-          {auxButtonLabel}
-        </button>
-      ) : null}
-      <fieldset className="form-group">
+      <Form inline onSubmit={handleSubmit}>
+        <FormGroup className="inline-next">
         <Field
           component={component}
           label={contentLabel}
@@ -34,16 +27,26 @@ const UserWizardPage = (props) => {
           checked={content}
           shouldFocus
         />
-      </fieldset>
-      <div>
-        <button
+        </FormGroup>
+        <FormGroup>
+        <Button
           type="submit"
           className="next"
         >
           {submitLabel}
-        </button>
-      </div>
-    </form>
+        </Button>
+        {(auxButtonLabel) ? (
+          <Button
+            type="button"
+            className="previous"
+            onClick={auxButton}
+          >
+            {auxButtonLabel}
+          </Button>
+        ) : null}
+
+      </FormGroup>
+      </Form>
   );
 };
 

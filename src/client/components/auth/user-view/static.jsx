@@ -20,7 +20,7 @@ const userView = ({ content, formValues, setPage, thisPage }) => {
     null;
 
   return (
-    <div onClick={setPageFunc} >
+    <div onClick={setPageFunc}  className="inline-next static" >
       <Static
         content={content}
         contentLabel={contentLabel}

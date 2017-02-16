@@ -1,5 +1,7 @@
 import React from 'react';
 import { FieldArray, reduxForm } from 'redux-form';
+import { Button } from 'react-bootstrap';
+
 import * as actions from '../../../actions';
 
 import PhoneNumbers from '../../form/phone-numbers';
@@ -18,13 +20,13 @@ const UserWizardPage = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       {(auxButtonLabel) ? (
-        <button
+        <Button
           type="button"
           className="previous"
           onClick={auxButton}
         >
           {auxButtonLabel}
-        </button>
+        </Button>
       ) : null}
       <fieldset className="form-group">
         <FieldArray
@@ -33,12 +35,12 @@ const UserWizardPage = (props) => {
           shouldFocus
         />
       </fieldset>
-      <button
+      <Button
         type="submit"
         className="next"
       >
         {submitLabel}
-      </button>
+      </Button>
     </form>
   );
 };

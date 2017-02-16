@@ -1,5 +1,7 @@
 import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
+import { Button, Form, FormGroup } from 'react-bootstrap';
+
 import * as actions from '../../../actions';
 
 import Addresses from '../../form/addresses';
@@ -11,30 +13,30 @@ import validate from '../../form/validate';
 const UserWizardPage = (props) => {
   const { handleSubmit, auxButton, auxButtonLabel, submitLabel } = props
   return (
-    <form onSubmit={handleSubmit}>
+    <Form inline onSubmit={handleSubmit}>
       {(auxButtonLabel) ? (
-        <button
+        <Button
           type="button"
           className="previous"
           onClick={auxButton}
         >
           {auxButtonLabel}
-        </button>
+        </Button>
       ) : null}
-      <fieldset className="form-group">
+      <FormGroup controlId="formInlineName">
         <FieldArray
           name="addresses"
           component={Addresses}
           shouldFocus
         />
-      </fieldset>
-      <button
+      </FormGroup>
+      <Button
         type="submit"
         className="next"
       >
         {submitLabel}
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 };
 

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Redirect, Link } from 'react-router-dom';
-import Popout from 'react-popout';
+import { Button, ButtonGroup, Form, FormGroup } from 'react-bootstrap';
 
 import { signinUser, ifToken } from '../../actions';
 import validate from './../form/validate';
@@ -61,8 +61,8 @@ let Signin = class Signin extends Component {
     }
     return (
       <div>
-        <form onSubmit={handleSubmit(this.handleFormSubmit)}>
-          <fieldset className="form-group">
+        <Form onSubmit={handleSubmit(this.handleFormSubmit)}>
+          <FormGroup>
             <Field
               component={Input}
               label="Email:"
@@ -70,8 +70,8 @@ let Signin = class Signin extends Component {
               type="email"
               placeholder="Type your email"
             />
-          </fieldset>
-          <fieldset className="form-group">
+          </FormGroup>
+          <FormGroup>
             <Field
               component={Input}
               label="Password:"
@@ -79,17 +79,17 @@ let Signin = class Signin extends Component {
               type="password"
               placeholder="Type a password"
             />
-          </fieldset>
+          </FormGroup>
           { this.renderAlert() }
-          <button type="submit" className="btn btn-primary" disabled={pristine || submitting}>Submit</button>
-          <button type="button" className="btn btn-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+          <Button type="submit" className="btn-primary" disabled={pristine || submitting}>Submit</Button>
+          <Button type="button" className="btn-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
           <span>
             {' or '}
             <Link to="/signup">
               {'Sign up!'}
             </Link>
           </span>
-        </form>
+        </Form>
       </div>
     );
   }

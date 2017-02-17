@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { ControlLabel } from 'react-bootstrap';
 
 import StaticAddress from '../../form/static-address';
 
@@ -16,7 +17,7 @@ const staticAddresses = ({ content = [], setPage, thisPage }) => {
 
   return (
     <div onClick={setPageFunc} >
-      Addresses:
+      <ControlLabel className="inline-this">Addresses</ControlLabel>
       <ul>
         {content.map(ad => (
           <li key={ad.locStreet} >

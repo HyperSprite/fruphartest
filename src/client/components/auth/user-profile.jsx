@@ -97,6 +97,7 @@ let UserEdit = class UserEdit extends Component {
     }
 
     return (
+
       <div>
         { page !== 1 && <UserViewStatic content={eventSelector.firstname} formValues={formValues.firstname} setPage={this.setPage} thisPage={1} />}
         { page === 1 && <UserEditInput content={eventSelector.firstname} formValues={formValues.firstname} auxButton={this.cancelFormEdit} auxButtonLabel="Cancel" onSubmit={handleSubmit(this.handleFormSubmit)} submitLabel='Save' />}

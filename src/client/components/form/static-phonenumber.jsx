@@ -16,7 +16,7 @@ const renderStatic = ({ phoneNumber, phoneType  }) => {
           className="static-label"
         >
           {phoneType}
-        </label>{': '}
+        </label>{' '}
         {phoneNumber}
       </div>
     );

@@ -64,7 +64,7 @@ const renderStatic = ({ baseURL, contentLabel, content, contentType, contentAlt,
           {contentLabel}
         </label>
         <div
-          className="static-sub-div"
+          className="static-txt"
         >
           {renderContent(content, contentType, contentAlt, baseURL, contentOptions)}
         </div>

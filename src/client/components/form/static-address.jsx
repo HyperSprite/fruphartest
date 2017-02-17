@@ -24,7 +24,7 @@ const renderStatic = ({ locType, locStreet, locStreet2, locCity, locState, locCo
   if (locType && locState) {
     return (
       <div
-        className="static"
+        className="inline-next static"
       >
         <Static
           content={addr}

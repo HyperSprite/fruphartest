@@ -1,13 +1,13 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Button, Col, ControlLabel, Form, FormControl, FormGroup, Row } from 'react-bootstrap';
+import { Button, ButtonGroup, Form, FormGroup } from 'react-bootstrap';
 
 import * as actions from '../../../actions';
 
 import validate from '../../form/validate';
 
 const UserWizardPage = (props) => {
-  const { content, formValues, handleSubmit, onSubmit, auxButton, auxButtonLabel, submitLabel } = props;
+  const { content, formValues, handleSubmit, onSubmit, auxButton, auxButtonLabel, pristine, submitting, submitLabel } = props;
   const {
     contentName,
     contentLabel,
@@ -17,8 +17,8 @@ const UserWizardPage = (props) => {
     component,
   } = formValues;
   return (
-      <Form inline onSubmit={handleSubmit}>
-        <FormGroup className="inline-next">
+    <Form inline onSubmit={handleSubmit}>
+      <FormGroup className="inline-next">
         <Field
           component={component}
           label={contentLabel}
@@ -27,26 +27,26 @@ const UserWizardPage = (props) => {
           checked={content}
           shouldFocus
         />
-        </FormGroup>
-        <FormGroup>
+      </FormGroup>
+      <ButtonGroup>
         <Button
           type="submit"
-          className="next"
+          className="next btn-primary"
+          disabled={pristine || submitting}
         >
           {submitLabel}
         </Button>
         {(auxButtonLabel) ? (
           <Button
             type="button"
-            className="previous"
+            className="previous btn-secondary"
             onClick={auxButton}
           >
             {auxButtonLabel}
           </Button>
-        ) : null}
-
-      </FormGroup>
-      </Form>
+          ) : null}
+      </ButtonGroup>
+    </Form>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FieldArray, reduxForm } from 'redux-form';
-import { Button } from 'react-bootstrap';
+import { Button, Form, FormGroup } from 'react-bootstrap';
 
 import * as actions from '../../../actions';
 
@@ -18,30 +18,32 @@ const UserWizardPage = (props) => {
     component,
   } = formValues;
   return (
-    <form onSubmit={handleSubmit}>
-      {(auxButtonLabel) ? (
-        <Button
-          type="button"
-          className="previous"
-          onClick={auxButton}
-        >
-          {auxButtonLabel}
-        </Button>
-      ) : null}
-      <fieldset className="form-group">
+    <Form onSubmit={handleSubmit}>
+      <FormGroup>
         <FieldArray
           name={contentName}
           component={component}
           shouldFocus
         />
-      </fieldset>
-      <Button
-        type="submit"
-        className="next"
-      >
-        {submitLabel}
-      </Button>
-    </form>
+      </FormGroup>
+      <FormGroup>
+        {(auxButtonLabel) ? (
+          <Button
+            type="button"
+            className="previous"
+            onClick={auxButton}
+          >
+            {auxButtonLabel}
+          </Button>
+        ) : null}
+        <Button
+          type="submit"
+          className="next"
+        >
+          {submitLabel}
+        </Button>
+      </FormGroup>
+    </Form>
   );
 };
 

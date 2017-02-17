@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { ControlLabel } from 'react-bootstrap';
 
 import StaticPhoneNumber from '../../form/static-phonenumber';
 
@@ -16,7 +17,7 @@ const staticPhoneNumbers = ({ content = [], setPage, thisPage }) => {
 
   return (
     <div  onClick={setPageFunc} >
-      Phone Numbers:
+      <ControlLabel className="inline-this">Phone Numbers</ControlLabel>
       <ul>
         {content.map((pN) => {
           return (

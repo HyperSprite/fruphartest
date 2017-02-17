@@ -10,7 +10,10 @@ import Input from './../form/input';
 import Alert from './../form/alert';
 
 const propTypes = {
+  authenticated: PropTypes.bool,
   handleSubmit: PropTypes.func,
+  modal: PropTypes.bool,
+  onRequestHide: PropTypes.func,
   signinUser: PropTypes.func,
   onClickifToken: PropTypes.func,
   ifToken: PropTypes.func,
@@ -19,28 +22,18 @@ const propTypes = {
 let Signin = class Signin extends Component {
   constructor(props) {
     super(props);
-    this.popout = this.popout.bind(this);
-    this.popoutClosed = this.popoutClosed.bind(this);
-    this.state = { isPoppedOut: false };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.popoutContentClicked = this.popoutContentClicked.bind(this);
+    this.handleSubmitSuccess = this.handleSubmitSuccess.bind(this);
   }
 
-  popout() {
-    this.setState({isPoppedOut: true});
-  }
-
-  popoutClosed() {
-    this.setState({isPoppedOut: false});
+  componentDidUpdate() {
+    if (this.props.modal && this.props.authenticated ) {
+      this.handleSubmitSuccess();
+    }
   }
 
   handleFormSubmit(formProps) {
     this.props.signinUser(formProps);
-  }
-
-  popoutContentClicked() {
-    this.props.ifToken();
-    this.popoutClosed();
   }
 
   renderAlert() {
@@ -51,8 +44,14 @@ let Signin = class Signin extends Component {
     }
   }
 
+  handleSubmitSuccess() {
+    if (this.props.authenticated) {
+      this.props.onRequestHide();
+    }
+  }
+
   render() {
-    const { handleSubmit, onClickifToken, authenticated, pristine, reset, submitting } = this.props;
+    const { authenticated, handleSubmit, onClickifToken, pristine, reset, submitting } = this.props;
 
     if (authenticated) {
       return (
@@ -61,7 +60,9 @@ let Signin = class Signin extends Component {
     }
     return (
       <div>
-        <Form onSubmit={handleSubmit(this.handleFormSubmit)}>
+        <Form
+          onSubmit={handleSubmit(this.handleFormSubmit)}
+        >
           <FormGroup>
             <Field
               component={Input}
@@ -81,14 +82,20 @@ let Signin = class Signin extends Component {
             />
           </FormGroup>
           { this.renderAlert() }
-          <Button type="submit" className="btn-primary" disabled={pristine || submitting}>Submit</Button>
-          <Button type="button" className="btn-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
-          <span>
-            {' or '}
-            <Link to="/signup">
-              {'Sign up!'}
-            </Link>
-          </span>
+          <ButtonGroup>
+            <Button type="submit" className="btn-primary" disabled={pristine || submitting}>Submit</Button>
+            <Button type="button" className="btn-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
+          </ButtonGroup>
+          {this.props.modal ? (
+            null
+          ) : (
+            <span>
+              {' or '}
+              <Link to="/signup">
+                {'Sign up!'}
+              </Link>
+            </span>
+          )}
         </Form>
       </div>
     );

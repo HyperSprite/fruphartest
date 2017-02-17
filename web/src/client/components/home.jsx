@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import * as actions from './../actions';
 import ScrollIntoView from './../containers/scroll-into-view';
+import SignModal from './auth/sign-modal';
 
 class Home extends Component {
   componentDidMount() {
@@ -13,6 +14,7 @@ class Home extends Component {
     return (
       <div>
         <h1>test</h1>
+        <SignModal />
       </div>
     );
   }

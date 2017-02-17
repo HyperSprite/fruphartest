@@ -9,12 +9,25 @@ import Input from './../form/input';
 import Alert from './../form/alert';
 
 const propTypes = {
-
+  authenticated: PropTypes.bool,
+  handleSubmit: PropTypes.func,
+  onRequestHide: PropTypes.func,
+  signinUser: PropTypes.func,
+  onClickifToken: PropTypes.func,
+  ifToken: PropTypes.func,
 };
+
 
 let Signup = class Signup extends Component {
   handleFormSubmit(formProps) {
     this.props.signupUser(formProps);
+    this.handleSubmitSuccess = this.handleSubmitSuccess.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.props.modal && this.props.authenticated ) {
+      this.handleSubmitSuccess();
+    }
   }
 
   renderAlert() {
@@ -25,6 +38,11 @@ let Signup = class Signup extends Component {
     }
   }
 
+  handleSubmitSuccess() {
+    if (this.props.authenticated) {
+      this.props.onRequestHide();
+    }
+  }
 
   render() {
     const { handleSubmit, authenticated, pristine, reset, submitting } = this.props;

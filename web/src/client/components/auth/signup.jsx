@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { Button, ButtonGroup, Form, FormGroup } from 'react-bootstrap';
 
 import * as actions from '../../actions';
 import validate from './../form/validate';
@@ -53,8 +54,8 @@ let Signup = class Signup extends Component {
       );
     }
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-        <fieldset className="form-group">
+      <Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+        <FormGroup>
           <Field
             component={Input}
             label="Email:"
@@ -63,8 +64,8 @@ let Signup = class Signup extends Component {
             placeholder="Type your email"
             shouldFocus
           />
-        </fieldset>
-        <fieldset className="form-group">
+        </FormGroup>
+        <FormGroup>
           <Field
             component={Input}
             label="Password:"
@@ -72,8 +73,8 @@ let Signup = class Signup extends Component {
             type="password"
             placeholder="Choose a password"
           />
-        </fieldset>
-        <fieldset className="form-group">
+        </FormGroup>
+        <FormGroup>
           <Field
             component={Input}
             label="Confirm Password:"
@@ -81,13 +82,13 @@ let Signup = class Signup extends Component {
             type="password"
             placeholder="Retype your password"
           />
-        </fieldset>
+        </FormGroup>
         { this.renderAlert() }
-        <div>
-          <button type="submit" className="btn btn-primary" disabled={pristine || submitting}>Submit</button>
-          <button type="button" className="btn btn-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-        </div>
-      </form>
+        <ButtonGroup>
+          <Button type="submit" className="btn btn-primary" disabled={pristine || submitting}>Submit</Button>
+          <Button type="button" className="btn btn-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
+        </ButtonGroup>
+      </Form>
     );
   }
 };

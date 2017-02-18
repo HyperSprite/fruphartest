@@ -59,45 +59,43 @@ let Signin = class Signin extends Component {
       );
     }
     return (
-      <div>
-        <Form
-          onSubmit={handleSubmit(this.handleFormSubmit)}
-        >
-          <FormGroup>
-            <Field
-              component={Input}
-              label="Email:"
-              name="email"
-              type="email"
-              placeholder="Type your email"
-            />
-          </FormGroup>
-          <FormGroup>
-            <Field
-              component={Input}
-              label="Password:"
-              name="password"
-              type="password"
-              placeholder="Type a password"
-            />
-          </FormGroup>
-          { this.renderAlert() }
-          <ButtonGroup>
-            <Button type="submit" className="btn-primary" disabled={pristine || submitting}>Submit</Button>
-            <Button type="button" className="btn-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
-          </ButtonGroup>
-          {this.props.modal ? (
-            null
-          ) : (
-            <span>
-              {' or '}
-              <Link to="/signup">
-                {'Sign up!'}
-              </Link>
-            </span>
-          )}
-        </Form>
-      </div>
+      <Form
+        onSubmit={handleSubmit(this.handleFormSubmit)}
+      >
+        <FormGroup>
+          <Field
+            component={Input}
+            label="Email:"
+            name="email"
+            type="email"
+            placeholder="Type your email"
+          />
+        </FormGroup>
+        <FormGroup>
+          <Field
+            component={Input}
+            label="Password:"
+            name="password"
+            type="password"
+            placeholder="Type a password"
+          />
+        </FormGroup>
+        { this.renderAlert() }
+        <ButtonGroup>
+          <Button type="submit" className="btn-primary" disabled={pristine || submitting}>Submit</Button>
+          <Button type="button" className="btn-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
+        </ButtonGroup>
+        {this.props.modal ? (
+          null
+        ) : (
+          <span>
+            {' or '}
+            <Link to="/signup">
+              {'Sign up!'}
+            </Link>
+          </span>
+        )}
+      </Form>
     );
   }
 };

@@ -51,7 +51,7 @@ let Signin = class Signin extends Component {
   }
 
   render() {
-    const { authenticated, handleSubmit, onClickifToken, pristine, reset, submitting } = this.props;
+    const { authenticated, handleSubmit, modal, onClickifToken, pristine, reset, submitting } = this.props;
 
     if (authenticated) {
       return (
@@ -69,6 +69,7 @@ let Signin = class Signin extends Component {
             name="email"
             type="email"
             placeholder="Type your email"
+            shouldFocus={modal}
           />
         </FormGroup>
         <FormGroup>

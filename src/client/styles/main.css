@@ -49,3 +49,22 @@ input[type="password"]:focus {
 .static-txt {
   margin-left: 1em;
 }
+
+.navbar-brand {
+  font-weight: bold !important;
+  font-size: 1.4em !important;
+}
+
+.nav-item {
+  font-weight: bold;
+  font-size: 1.3em
+}
+
+.navbar.center .navbar-inner {
+    text-align: center;
+}
+
+.navbar.center .navbar-inner .nav {
+    display:inline-block;
+    float: none;
+}

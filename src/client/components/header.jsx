@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Nav, Navbar, NavItem } from 'react-bootstrap'
 
 import router from './../router';
 
@@ -27,18 +28,24 @@ class Header extends Component {
     );
   }
 
-
   render() {
     return (
-      <nav className="navbar navbar-light">
-        <Link to="/" className="navbar-brand" >Home</Link>
+      <Navbar inverse fluid >
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/">Brand</Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
         <ul className="nav navbar-nav">
           {this.renderLinks()}
           <li className="nav-item">
             <Link to="/user-profile">User Profile</Link>
           </li>
         </ul>
-      </nav>
+      </Navbar.Collapse>
+      </Navbar>
     );
   }
 }

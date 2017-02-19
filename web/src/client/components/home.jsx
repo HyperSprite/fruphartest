@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import * as actions from './../actions';
 import ScrollIntoView from './../containers/scroll-into-view';
-import SignModal from './auth/sign-modal';
 
 class Home extends Component {
   componentDidMount() {
@@ -21,7 +20,6 @@ class Home extends Component {
         <div className="main-sidebar" />
         <div className="main">
           <h1>Welcome</h1>
-          <SignModal />
           <p>Justice is about harmony. Revenge is about you making yourself feel better.
 
   I seek the means to fight injustice. To turn fear against those who prey on the fearful.

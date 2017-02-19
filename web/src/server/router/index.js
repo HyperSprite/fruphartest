@@ -24,7 +24,6 @@ const indexHTML = `
       <![endif]-->
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
       <title>Fru Phar Test</title>
     </head>
     <body>

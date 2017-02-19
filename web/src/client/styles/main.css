@@ -1,12 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,500');
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css');
 @import url('./bootstrap-colors.css');
 
-body {
-  font-family: 'Lato', sans-serif;
-  background-color: #fefefe;
-  color: #13254B;
-}
-
+/*Forms*/
 .inline-this {
   display: inline;
   margin: 1em;
@@ -50,6 +46,53 @@ input[type="password"]:focus {
   margin-left: 1em;
 }
 
+/*Site*/
+.site {
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.site-main {
+  box-sizing: border-box;
+}
+
+.site-main::after {
+  content: '\00a0';
+  display: block;
+  margin-top: 10vh;
+  height: 0px;
+  visibility: hidden;
+}
+
+.site-footer {
+  box-sizing: border-box;
+}
+
+.main-flex-container {
+  min-height: 20vh;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-flow: row;
+  flex: 1;
+}
+
+.main {
+  flex: 6 1 auto;
+  max-width: 56em;
+  display: flex;
+  flex-direction: column;
+  margin-top: 72px;
+}
+
+.main-sidebar {
+  flex: 2 1 auto;
+}
+
+/*Navbar*/
 .navbar-brand {
   font-weight: bold !important;
   font-size: 1.4em !important;
@@ -60,11 +103,16 @@ input[type="password"]:focus {
   font-size: 1.3em
 }
 
-.navbar.center .navbar-inner {
-    text-align: center;
+.nav-flex-display {
+  display: flex;
 }
 
-.navbar.center .navbar-inner .nav {
-    display:inline-block;
-    float: none;
+.nav-flex-sidebar {
+  height: 1em;
+  flex: 2 2 auto;
+}
+
+.nav-flex-main {
+  flex: 1 2 auto;
+  justify-content: center;
 }

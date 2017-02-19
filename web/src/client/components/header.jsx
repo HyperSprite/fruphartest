@@ -30,22 +30,30 @@ class Header extends Component {
 
   render() {
     return (
-      <Navbar inverse fluid >
+      <div>
+      <Navbar inverse fluid fixedTop>
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">Brand</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
-        <Navbar.Collapse>
-        <ul className="nav navbar-nav">
-          {this.renderLinks()}
-          <li className="nav-item">
-            <Link to="/user-profile">User Profile</Link>
-          </li>
-        </ul>
-      </Navbar.Collapse>
+        <div className="nav-flex-display" >
+          <div className="nav-flex-sidebar" />
+          <div className="nav-flex-main" >
+            <Navbar.Collapse>
+              <ul className="nav navbar-nav">
+                {this.renderLinks()}
+                <li className="nav-item">
+                  <Link to="/user-profile">User Profile</Link>
+                </li>
+              </ul>
+            </Navbar.Collapse>
+          </div>
+          <div className="nav-flex-sidebar" />
+        </div>
       </Navbar>
+    </div>
     );
   }
 }

@@ -19,5 +19,6 @@ export type ActionStrings = (
   'FETCH_JSON' |
   'SET_USER' |
   'PAGE_TRANSITION_FALSE' |
-  'PAGE_TRANSITION_TRUE'
+  'PAGE_TRANSITION_TRUE' |
+  'TOGGLE_MODAL'
   )

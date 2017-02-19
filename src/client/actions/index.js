@@ -21,6 +21,7 @@ export const TYPES: {[key: ActionStrings]: ActionStrings} = {
   FETCH_JSON: 'FETCH_JSON',
   PAGE_TRANSITION_FALSE: 'PAGE_TRANSITION_FALSE',
   PAGE_TRANSITION_TRUE: 'PAGE_TRANSITION_TRUE',
+  TOGGLE_MODAL: 'TOGGLE_MODAL',
 };
 
 // handle error mesages
@@ -100,6 +101,12 @@ export function pageTransitionFalse () {
   return (dispatch) => dispatch({ type: TYPES.PAGE_TRANSITION_FALSE });
 }
 
+export function toggleModal(options) {
+  return {
+    type: TYPES.TOGGLE_MODAL,
+    payload: options,
+  };
+}
 
 export function fetchMessage() {
   return (dispatch) => {

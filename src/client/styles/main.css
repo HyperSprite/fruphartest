@@ -57,6 +57,7 @@ input[type="password"]:focus {
 
 .site-main {
   box-sizing: border-box;
+  margin-top: 72px;
 }
 
 .site-main::after {
@@ -85,7 +86,7 @@ input[type="password"]:focus {
   max-width: 56em;
   display: flex;
   flex-direction: column;
-  margin-top: 72px;
+
 }
 
 .main-sidebar {
@@ -115,4 +116,12 @@ input[type="password"]:focus {
 .nav-flex-main {
   flex: 1 2 auto;
   justify-content: center;
+}
+
+/*Loading component*/
+
+.loading {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }

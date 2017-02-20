@@ -28,7 +28,7 @@ const UserWizardPage = (props) => {
           shouldFocus
         />
       </FormGroup>
-      <ButtonGroup>
+      <ButtonGroup className="edit-in-place">
         <Button
           type="submit"
           className="next btn-primary"

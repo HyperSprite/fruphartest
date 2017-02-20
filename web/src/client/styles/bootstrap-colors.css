@@ -2898,16 +2898,19 @@ select[multiple].input-lg,
 .btn-default {
   color: #333;
   background-color: #fff;
-  border-color: #ccc; }
+  border-color: #ccc;
+}
   .btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
     color: #333;
     background-color: #e6e6e6;
-    border-color: #adadad; }
+    border-color: #adadad;
+  }
   .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
     background-image: none; }
   .btn-default.disabled, .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled.focus, .btn-default.disabled:active, .btn-default.disabled.active, .btn-default[disabled], .btn-default[disabled]:hover, .btn-default[disabled]:focus, .btn-default[disabled].focus, .btn-default[disabled]:active, .btn-default[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default.focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default.active {
     background-color: #fff;
-    border-color: #ccc; }
+    border-color: #ccc;
+  }
   .btn-default .badge {
     color: #fff;
     background-color: #333; }
@@ -2915,11 +2918,13 @@ select[multiple].input-lg,
 .btn-primary {
   color: #fff;
   background-color: #4183D7;
-  border-color: #2c75d2; }
+  border-color: #4183D7;
+}
   .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
     color: #fff;
     background-color: #F9B29D;
-    border-color: #2259a0; }
+    border-color: #F9B29D;
+  }
   .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
     background-image: none; }
   .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
@@ -4194,32 +4199,38 @@ a.badge:hover, a.badge:focus {
   cursor: pointer; }
 
 .jumbotron {
-  padding: 30px 15px;
+  /*padding: 30px 15px;*/
   margin-bottom: 30px;
   color: inherit;
-  background-color: #6C7A89; }
+  /*background-color: rgba(0,0,0,0.1);*/
+}
   .jumbotron h1,
   .jumbotron .h1 {
-    color: inherit; }
+    color: inherit;
+    font-weight: 800;
+  }
   .jumbotron p {
     margin-bottom: 15px;
-    font-size: 21px;
-    font-weight: 200; }
+    font-size: 28px;
+    font-weight: 400; }
   .jumbotron > hr {
     border-top-color: #56616c; }
   .container .jumbotron, .container-fluid .jumbotron {
-    border-radius: 3px; }
+    border-radius: 1px; }
   .jumbotron .container {
     max-width: 100%; }
   @media screen and (min-width: 768px) {
     .jumbotron {
-      padding: 48px 0; }
+      padding: 48px 0;
+    }
       .container .jumbotron, .container-fluid .jumbotron {
         padding-left: 60px;
         padding-right: 60px; }
       .jumbotron h1,
       .jumbotron .h1 {
-        font-size: 63px; } }
+        font-size: 63px;
+      }
+    }
 
 .thumbnail {
   display: block;

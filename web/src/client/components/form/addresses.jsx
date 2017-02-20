@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Field } from 'redux-form';
+import { Button, Col, Form, FormGroup, Row } from 'react-bootstrap';
+
 import Input from './input';
 import Select from './select';
 
@@ -18,9 +20,9 @@ const renderAddresses = ({ fields }) => (
   <ul>
     {fields.map((aD, index) =>
       <li
-        key={`${aD.locStreet}`}
+        key={aD.locStreet}
       >
-        <div>
+        <div className="form-box">
           <Field
             name={`${aD}.locType`}
             type="text"
@@ -65,26 +67,25 @@ const renderAddresses = ({ fields }) => (
             component={Input}
             label="ZIP code"
           />
-          <div>
-            <button
-              type="button"
-              onClick={() => fields.remove(index)}
-            >
-            delete
-            </button>
-          </div>
-
+          <Button
+            type="button"
+            bsStyle="danger"
+            onClick={() => fields.remove(index)}
+          >
+          delete
+          </Button>
         </div>
       </li>,
     )}
     <li>
-      <button
+      <Button
         type="button"
         onClick={() => fields.push()}
+        className="next btn-primary"
         autoFocus
       >
         Add Address
-      </button>
+      </Button>
     </li>
   </ul>
 );

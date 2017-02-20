@@ -1,14 +1,13 @@
 import React from 'react';
 import { FieldArray, reduxForm } from 'redux-form';
-import { Button, Form, FormGroup } from 'react-bootstrap';
+import { Button, ButtonGroup, Form, FormGroup } from 'react-bootstrap';
 
 import * as actions from '../../../actions';
 
-import PhoneNumbers from '../../form/phone-numbers';
 import validate from '../../form/validate';
 
 const UserWizardPage = (props) => {
-  const { formValues, handleSubmit, auxButton, auxButtonLabel, submitLabel } = props
+  const { formValues, handleSubmit, auxButton, auxButtonLabel, pristine, submitting, submitLabel } = props
   const {
     contentName,
     contentLabel,
@@ -27,21 +26,24 @@ const UserWizardPage = (props) => {
         />
       </FormGroup>
       <FormGroup>
-        {(auxButtonLabel) ? (
+        <ButtonGroup className="edit-in-place">
           <Button
-            type="button"
-            className="previous"
-            onClick={auxButton}
+            type="submit"
+            className="next btn-primary"
+            disabled={pristine || submitting}
           >
-            {auxButtonLabel}
+            {submitLabel}
           </Button>
-        ) : null}
-        <Button
-          type="submit"
-          className="next"
-        >
-          {submitLabel}
-        </Button>
+          {(auxButtonLabel) ? (
+            <Button
+              type="button"
+              className="previous btn-secondary"
+              onClick={auxButton}
+            >
+              {auxButtonLabel}
+            </Button>
+            ) : null}
+        </ButtonGroup>
       </FormGroup>
     </Form>
   );

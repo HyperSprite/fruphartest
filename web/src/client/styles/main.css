@@ -2,6 +2,18 @@
 @import url('https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css');
 @import url('./bootstrap-colors.css');
 
+/* Colors
+b1 - #4183d7 Royal Blue
+b2 - #c6d9f3
+b3 - #2e5c98
+b4 - #13254B Dark Royal
+o1 - #F9B29D Light Crusta
+o2 - #F2784B Crusta
+g1 - #6C7A89 Lynch
+g2 - #ccc
+w1 - #fefefe
+*/
+
 /*Forms*/
 .inline-this {
   display: inline;
@@ -23,7 +35,8 @@
 
 input[type="text"],
 input[type="email"],
-input[type="password"]   {
+input[type="password"],
+select.form-control {
      border-top: 0;
      border-right: 0;
      border-left: 0;
@@ -33,13 +46,31 @@ input[type="password"]   {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+select.form-control:focus {
      -webkit-box-shadow: 0 2px 1px -1px #4183D7;
      box-shadow: 0 2px 1px -1px #4183D7;
 }
 
-.btn, .btn-group {
+select.form-control:focus {
+  background-color: #c6d9f3;
+  color: #6C7A89;
+}
+
+.edit-in-place {
   margin-left: 1em;
+}
+
+.form-box {
+  margin-bottom: 2em;
+  padding: 0.5em;
+  color: inherit;
+  border: 2px solid rgba(0,0,0,0.1);
+  border-radius: 1px;
+}
+
+.form-box button {
+  margin: 4px;
 }
 
 .static-txt {
@@ -118,8 +149,33 @@ input[type="password"]:focus {
   justify-content: center;
 }
 
-/*Loading component*/
+/*Landing Page*/
+.landing-page {
+  background-color: #2e5c98;
+  color: #fefefe;
+}
 
+/*Jumbotron*/
+.jumbotron {
+  margin-top: 10vh;
+  background-color: rgba(0,0,0,0.1);
+  /*background-color: initial;*/
+}
+
+.jumbotron button {
+  font-size: 2em;
+  font-weight: 600;
+  margin-left: 0px;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.4);
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.6);
+}
+
+.space {
+  content: '\00a0';
+}
+
+/*Loading component*/
 .loading {
   width: 80%;
   margin-left: auto;

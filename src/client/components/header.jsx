@@ -13,10 +13,29 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.openModal = this.openModal.bind(this);
+    this.toggleNav = this.toggleNav.bind(this);
+  }
+
+
+
+  state = {
+    navExpanded: false,
   }
 
   openModal(options) {
     this.props.toggleModal(options);
+  }
+
+  setNavExpanded(expanded) {
+    this.setState({ navExpanded: expanded });
+  }
+
+  toggleNav(option) {
+    if (option) {
+      this.setState({ navExpanded: !this.state.navExpanded });
+    } else {
+      this.setState({ navExpanded: false });
+    }
   }
 
   renderLinks() {
@@ -60,24 +79,30 @@ class Header extends Component {
       ]
     );
   }
-
+// TODO fix navbar onClick
   render() {
     return (
       <div>
-        <Navbar inverse fluid fixedTop>
+        <Navbar
+          inverse
+          fluid
+          fixedTop
+          onToggle={() => this.setNavExpanded}
+          expanded={this.state.navExpanded}
+        >
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/">Brand</Link>
+              <Link to="/" onClick={() => this.toggleNav()}>Brand</Link>
             </Navbar.Brand>
-            <Navbar.Toggle />
+            <Navbar.Toggle onClick={() => this.toggleNav(true)} />
           </Navbar.Header>
           <div className="nav-flex-display" >
             <div className="nav-flex-sidebar" />
             <div className="nav-flex-main" >
-              <Navbar.Collapse>
+              <Navbar.Collapse onClick={() => this.toggleNav(true)} >
                 <ul className="nav navbar-nav">
                   <li className="nav-item" key={'Search'} >
-                    <Link to="/search">Search</Link>
+                    <Link to="/search" >Search</Link>
                   </li>
                   {this.renderLinks()}
                   <li className="nav-item" key={'About'} >

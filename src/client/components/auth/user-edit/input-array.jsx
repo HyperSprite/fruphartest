@@ -7,7 +7,7 @@ import * as actions from '../../../actions';
 import validate from '../../form/validate';
 
 const UserWizardPage = (props) => {
-  const { formValues, handleSubmit, auxButton, auxButtonLabel, pristine, submitting, submitLabel } = props
+  const { formValues, handleSubmit, auxButton, auxButtonLabel, pristine, shouldFocus, submitting, submitLabel } = props
   const {
     contentName,
     contentLabel,
@@ -22,7 +22,7 @@ const UserWizardPage = (props) => {
         <FieldArray
           name={contentName}
           component={component}
-          shouldFocus
+          shouldFocus={shouldFocus}
         />
       </FormGroup>
       <FormGroup>

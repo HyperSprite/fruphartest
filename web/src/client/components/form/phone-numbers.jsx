@@ -1,10 +1,17 @@
 import React, { PropTypes } from 'react';
 import { Field } from 'redux-form';
+import { Button } from 'react-bootstrap';
+
 import Input from './input';
 import Select from './select';
 
 const propTypes = {
   fields: PropTypes.object,
+  shouldFocus: PropTypes.bool,
+};
+
+const defaultProps = {
+  shouldFocus: false,
 };
 
 const enumPhones = [
@@ -16,13 +23,13 @@ const enumPhones = [
   'Other',
 ];
 
-const renderPhoneNumbers = ({ fields }) => (
+const renderPhoneNumbers = ({ fields, shouldFocus }) => (
   <ul>
     {fields.map((pN, index) =>
       <li
         key={`${pN}.phoneNumber`}
       >
-        <div>
+        <div className="form-box">
           <Field
             name={`${pN}.phoneType`}
             type="text"
@@ -38,29 +45,31 @@ const renderPhoneNumbers = ({ fields }) => (
             label="Phone Number"
           />
           <div>
-            <button
+            <Button
               type="button"
+              bsStyle="danger"
               onClick={() => fields.remove(index)}
             >
             delete
-            </button>
+            </Button>
           </div>
 
         </div>
       </li>,
     )}
     <li>
-      <button
+      <Button
         type="button"
         onClick={() => fields.push()}
-        autoFocus
+        autoFocus={shouldFocus}
       >
         Add Phone Number
-      </button>
+      </Button>
     </li>
   </ul>
 );
 
 renderPhoneNumbers.propTypes = propTypes;
+renderPhoneNumbers.defaultProps = defaultProps;
 
 export default renderPhoneNumbers;

@@ -1,12 +1,17 @@
 import React, { PropTypes } from 'react';
 import { Field } from 'redux-form';
-import { Button, Col, Form, FormGroup, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 import Input from './input';
 import Select from './select';
 
 const propTypes = {
   fields: PropTypes.object,
+  shouldFocus: PropTypes.bool,
+};
+
+const defaultProps = {
+  shouldFocus: false,
 };
 
 const enumAddress = [
@@ -16,7 +21,7 @@ const enumAddress = [
 ];
 
 
-const renderAddresses = ({ fields }) => (
+const renderAddresses = ({ fields, shouldFocus }) => (
   <ul>
     {fields.map((aD, index) =>
       <li
@@ -81,8 +86,7 @@ const renderAddresses = ({ fields }) => (
       <Button
         type="button"
         onClick={() => fields.push()}
-        className="next btn-primary"
-        autoFocus
+        autoFocus={shouldFocus}
       >
         Add Address
       </Button>
@@ -91,5 +95,6 @@ const renderAddresses = ({ fields }) => (
 );
 
 renderAddresses.propTypes = propTypes;
+renderAddresses.defaultProps = defaultProps;
 
 export default renderAddresses;

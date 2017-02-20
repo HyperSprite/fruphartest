@@ -19,7 +19,7 @@ const UserWizardPageLast = (props) => {
         {(auxButtonLabel) ? (
           <Button
             type="button"
-            className="previous"
+            className="previous edit-in-place"
             onClick={auxButton}
           >
             {auxButtonLabel}
@@ -27,6 +27,7 @@ const UserWizardPageLast = (props) => {
         ) : null}
         <Button
           type="submit"
+          className="edit-in-place"
           disabled={pristine || submitting}
         >
           Submit

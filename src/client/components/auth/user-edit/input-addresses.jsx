@@ -17,7 +17,7 @@ const UserWizardPage = (props) => {
       {(auxButtonLabel) ? (
         <Button
           type="button"
-          className="previous"
+          className="previous edit-in-place"
           onClick={auxButton}
         >
           {auxButtonLabel}
@@ -32,7 +32,7 @@ const UserWizardPage = (props) => {
       </FormGroup>
       <Button
         type="submit"
-        className="next"
+        className="next edit-in-place"
       >
         {submitLabel}
       </Button>

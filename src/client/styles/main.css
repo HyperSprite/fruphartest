@@ -90,13 +90,9 @@ label:focus,
   outline:0px !important;
 }
 
-.center-form {
-
-}
-
-.no-scroll-form-feed {
+.scroll-to-bottom {
   margin-top: 20vh;
-  /*margin-bottom: 70vh;*/
+  margin-bottom: 56vh;
 }
 
 /*Site*/

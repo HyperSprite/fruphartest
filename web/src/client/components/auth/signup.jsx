@@ -85,8 +85,8 @@ let Signup = class Signup extends Component {
         </FormGroup>
         { this.renderAlert() }
         <ButtonGroup>
-          <Button type="submit" className="btn btn-primary" disabled={pristine || submitting}>Submit</Button>
-          <Button type="button" className="btn btn-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
+          <Button type="submit" bsStyle="primary" disabled={pristine || submitting}>Submit</Button>
+          <Button type="button" bsStyle="info" disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
         </ButtonGroup>
       </Form>
     );

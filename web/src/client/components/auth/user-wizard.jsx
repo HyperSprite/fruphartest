@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { formValueSelector, reduxForm } from 'redux-form';
@@ -36,10 +35,6 @@ let UserWizard = class UserWizard extends Component {
     };
   }
 
-  componentDidUpdate() {
-    this.scrollToBottom();
-  }
-
   componentDidMount() {
     this.props.fetchMessage();
     this.props.fetchData('auth/user');
@@ -47,11 +42,6 @@ let UserWizard = class UserWizard extends Component {
 
   componentWillUnmount() {
     this.props.pageTransitionFalse();
-  }
-
-  scrollToBottom = () => {
-    const node = findDOMNode(this.messagesEnd);
-    node.scrollIntoView({ behavior: 'smooth' });
   }
 
   handleFormSubmit(formProps) {
@@ -114,7 +104,7 @@ let UserWizard = class UserWizard extends Component {
     }
 
     return (
-      <div className="main-flex-container scroll-to-bottom" >
+      <div className="main-flex-container" >
         <div className="main-sidebar" />
         <div className="main">
           <h1>Let's get some more informatoin...</h1>
@@ -134,10 +124,6 @@ let UserWizard = class UserWizard extends Component {
           { page === 7 && <UserEditInput content={eventSelector.userName} formValues={formValues.userName} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
           { page === 8 && <UserEditPageLast formValues={{ contentName: 'lastpage' }} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={handleSubmit(this.handleFormSubmit)} />}
           { this.renderAlert() }
-          <div
-            style={{ float: 'left', clear: 'both' }}
-            ref={(elmnt) => { this.messagesEnd = elmnt; }}
-          />
         </div>
         <div className="main-sidebar" />
       </div>

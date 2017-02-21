@@ -83,8 +83,8 @@ let Signin = class Signin extends Component {
         </FormGroup>
         { this.renderAlert() }
         <ButtonGroup>
-          <Button type="submit" className="btn-primary" disabled={pristine || submitting}>Submit</Button>
-          <Button type="button" className="btn-secondary" disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
+          <Button type="submit" bsStyle="primary" disabled={pristine || submitting}>Submit</Button>
+          <Button type="button" bsStyle="info" disabled={pristine || submitting} onClick={reset}>Clear Values</Button>
         </ButtonGroup>
         {this.props.modal ? (
           null

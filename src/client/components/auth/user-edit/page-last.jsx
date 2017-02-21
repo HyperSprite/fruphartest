@@ -11,9 +11,9 @@ import PhoneNumbers from '../../form/phone-numbers';
 import validate from '../../form/validate';
 
 const UserWizardPageLast = (props) => {
-  const { handleSubmit, pristine, previousPage, submitting,  auxButton, auxButtonLabel, submitLabel } = props
+  const { contentName, handleSubmit, pristine, previousPage, submitting,  auxButton, auxButtonLabel, submitLabel } = props
   return (
-    <form onSubmit={handleSubmit}>
+    <form id={contentName} onSubmit={handleSubmit}>
       {/* { renderAlert() } */}
       <div>
         {(auxButtonLabel) ? (

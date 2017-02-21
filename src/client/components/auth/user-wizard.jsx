@@ -13,6 +13,11 @@ import UserViewAddresses from './user-view/static-addresses';
 import UserEditInput from './user-edit/input';
 import UserEditArray from './user-edit/input-array';
 import UserEditPageLast from './user-edit/page-last';
+import ScrollIntoView from '../../containers/scroll-into-view';
+import PageFieldHash from '../../containers/page-field-hash';
+
+const HOCUserEditInput = PageFieldHash(UserEditInput);
+const HOCUserEditArray = PageFieldHash(UserEditArray);
 
 const relURL = '/auth/edituser';
 
@@ -27,9 +32,12 @@ let UserWizard = class UserWizard extends Component {
     super();
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
-    this.state = { page: 1 };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.cancelFormEdit = this.cancelFormEdit.bind(this);
+    this.state = {
+      page: 1,
+      headerHeight: window.innerHeight / 2,
+    };
   }
 
   componentDidMount() {
@@ -46,7 +54,6 @@ let UserWizard = class UserWizard extends Component {
   }
 
   cancelFormEdit() {
-    // this.props.cancelEdit();
     () => <Redirect to="/home" />;
   }
 
@@ -87,6 +94,7 @@ let UserWizard = class UserWizard extends Component {
 
     const {
       page,
+      headerHeight,
     } = this.state;
 
     if (!authenticated) {
@@ -102,24 +110,32 @@ let UserWizard = class UserWizard extends Component {
     }
 
     return (
-      <div>
-        <h1>Let's get some more informatoin...</h1>
-        { page > 1 && <UserViewStatic content={eventSelector.firstname} formValues={formValues.firstname} />}
-        { page > 2 && <UserViewStatic content={eventSelector.lastname} formValues={formValues.lastname} />}
-        { page > 3 && <UserViewStatic content={eventSelector.profile} formValues={formValues.profile} />}
-        { page > 4 && <UserViewStatic content={eventSelector.locationPref} formValues={formValues.locationPref} />}
-        { page > 5 && <UserViewPhone content={eventSelector.phoneNumbers} formValues={formValues.phoneNumbers} />}
-        { page > 6 && <UserViewAddresses content={eventSelector.addresses} formValues={formValues.addresses} />}
-        { page > 7 && <UserViewStatic content={eventSelector.userName} formValues={formValues.userName} />}
-        { page === 1 && <UserEditInput content={eventSelector.firstname} formValues={formValues.firstname} onSubmit={this.nextPage} submitLabel="Next" />}
-        { page === 2 && <UserEditInput content={eventSelector.lastname} formValues={formValues.lastname} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
-        { page === 3 && <UserEditInput content={eventSelector.profile} formValues={formValues.profile} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
-        { page === 4 && <UserEditInput content={eventSelector.locationPref} formValues={formValues.locationPref} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
-        { page === 5 && <UserEditArray content={eventSelector.phoneNumbers} shouldFocus formValues={formValues.phoneNumbers} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
-        { page === 6 && <UserEditArray content={eventSelector.addresses} shouldFocus formValues={formValues.addresses} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
-        { page === 7 && <UserEditInput content={eventSelector.userName} formValues={formValues.userName} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
-        { page === 8 && <UserEditPageLast auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={handleSubmit(this.handleFormSubmit)} />}
-        { this.renderAlert() }
+      <div className="main-flex-container no-scroll-form-feed">
+        <ScrollIntoView
+          id=""
+          headerHeight={35}
+        />
+        <div className="main-sidebar" />
+        <div className="main">
+          <h1>Let's get some more informatoin...</h1>
+          { page > 1 && <UserViewStatic content={eventSelector.firstname} formValues={formValues.firstname} />}
+          { page > 2 && <UserViewStatic content={eventSelector.lastname} formValues={formValues.lastname} />}
+          { page > 3 && <UserViewStatic content={eventSelector.profile} formValues={formValues.profile} />}
+          { page > 4 && <UserViewStatic content={eventSelector.locationPref} formValues={formValues.locationPref} />}
+          { page > 5 && <UserViewPhone content={eventSelector.phoneNumbers} formValues={formValues.phoneNumbers} />}
+          { page > 6 && <UserViewAddresses content={eventSelector.addresses} formValues={formValues.addresses} />}
+          { page > 7 && <UserViewStatic content={eventSelector.userName} formValues={formValues.userName} />}
+          { page === 1 && <HOCUserEditInput content={eventSelector.firstname} formValues={formValues.firstname} onSubmit={this.nextPage} submitLabel="Next" />}
+          { page === 2 && <HOCUserEditInput content={eventSelector.lastname} formValues={formValues.lastname} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
+          { page === 3 && <HOCUserEditInput content={eventSelector.profile} formValues={formValues.profile} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
+          { page === 4 && <HOCUserEditInput content={eventSelector.locationPref} formValues={formValues.locationPref} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
+          { page === 5 && <HOCUserEditArray content={eventSelector.phoneNumbers} shouldFocus formValues={formValues.phoneNumbers} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
+          { page === 6 && <HOCUserEditArray content={eventSelector.addresses} shouldFocus formValues={formValues.addresses} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
+          { page === 7 && <HOCUserEditInput content={eventSelector.userName} formValues={formValues.userName} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={this.nextPage} submitLabel="Next" />}
+          { page === 8 && <UserEditPageLast formValues={{ contentName: 'lastpage' }} auxButton={this.previousPage} auxButtonLabel="Back" onSubmit={handleSubmit(this.handleFormSubmit)} />}
+          { this.renderAlert() }
+        </div>
+        <div className="main-sidebar" />
       </div>
     );
   }

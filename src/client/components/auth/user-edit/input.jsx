@@ -16,8 +16,9 @@ const UserWizardPage = (props) => {
     contentOptions,
     component,
   } = formValues;
+
   return (
-    <Form inline onSubmit={handleSubmit}>
+    <Form id={contentName} inline onSubmit={handleSubmit}>
       <FormGroup className="inline-next">
         <Field
           component={component}

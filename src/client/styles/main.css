@@ -77,6 +77,28 @@ select.form-control:focus {
   margin-left: 1em;
 }
 
+
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+label:focus,
+.btn:active,
+.btn.active {
+  outline:0px !important;
+}
+
+.center-form {
+
+}
+
+.no-scroll-form-feed {
+  margin-top: 20vh;
+  /*margin-bottom: 70vh;*/
+}
+
 /*Site*/
 .site {
   height: 100vh;
@@ -103,25 +125,18 @@ select.form-control:focus {
   box-sizing: border-box;
 }
 
-.main-flex-container {
-  min-height: 20vh;
-  margin: 0px;
-  padding: 0px;
+.main-flex-container{
   display: flex;
-  flex-flow: row;
-  flex: 1;
-}
-
-.main {
-  flex: 6 1 auto;
-  max-width: 56em;
-  display: flex;
-  flex-direction: column;
-
 }
 
 .main-sidebar {
-  flex: 2 1 auto;
+  height: 1em;
+  flex: 2 2 auto;
+}
+
+.main {
+  flex: 1 2 auto;
+  justify-content: center;
 }
 
 /*Navbar*/

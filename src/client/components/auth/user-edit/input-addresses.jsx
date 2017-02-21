@@ -13,7 +13,7 @@ import validate from '../../form/validate';
 const UserWizardPage = (props) => {
   const { handleSubmit, auxButton, auxButtonLabel, submitLabel } = props
   return (
-    <Form inline onSubmit={handleSubmit}>
+    <Form id={contentName} inline onSubmit={handleSubmit}>
       {(auxButtonLabel) ? (
         <Button
           type="button"

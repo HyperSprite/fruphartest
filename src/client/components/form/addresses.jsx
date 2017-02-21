@@ -20,7 +20,6 @@ const enumAddress = [
   'Other',
 ];
 
-
 const renderAddresses = ({ fields, shouldFocus }) => (
   <ul>
     {fields.map((aD, index) =>

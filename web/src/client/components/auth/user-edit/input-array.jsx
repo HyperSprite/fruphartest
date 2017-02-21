@@ -17,7 +17,7 @@ const UserWizardPage = (props) => {
     component,
   } = formValues;
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form id={contentName} onSubmit={handleSubmit}>
       <FormGroup>
         <FieldArray
           name={contentName}

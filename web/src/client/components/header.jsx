@@ -16,8 +16,6 @@ class Header extends Component {
     this.toggleNav = this.toggleNav.bind(this);
   }
 
-
-
   state = {
     navExpanded: false,
   }

@@ -6,7 +6,7 @@ import RouteAuthorized from './matchauth';
 import About from './../components/about';
 import Contact from './../components/contact';
 import Home from './../components/home';
-import Search from './../components/search';
+import Search from './../components/search/search-wizard';
 import Signin from './../components/auth/signin';
 import Signup from './../components/auth/signup';
 import Signout from './../components/auth/signout';

@@ -49,7 +49,7 @@ let UserWizard = class UserWizard extends Component {
   }
 
   cancelFormEdit() {
-    () => <Redirect to="/home" />;
+    () => <Redirect to="/" />;
   }
 
   nextPage() {

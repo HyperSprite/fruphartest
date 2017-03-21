@@ -26,11 +26,11 @@ const UserWizardPage = (props) => {
         />
       </FormGroup>
       <FormGroup>
-        <ButtonGroup className="edit-in-place">
+        <ButtonGroup className="edit-in-place btn-group-lg">
           <Button
             type="submit"
             bsStyle="primary"
-            className="next"
+            className="next btn-lg"
             disabled={pristine || submitting}
           >
             {submitLabel}

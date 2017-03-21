@@ -103,7 +103,7 @@ let SearchWizard = class SearchWizard extends Component {
     return (
       <div className="main-flex-container" >
         <div className="main-sidebar" />
-        <div className="main">
+        <div className="main form-main">
           <h1>Search</h1>
           { page > 1 && <ViewStatic content={eventSelector.drugName} formValues={formValues.drugName} />}
           { page > 2 && <ViewStatic content={eventSelector.drugDosage} formValues={formValues.drugDosage} />}

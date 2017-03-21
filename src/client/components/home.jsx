@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Button, Col, Jumbotron, Row } from 'react-bootstrap';
 
 import * as actions from './../actions';
@@ -24,9 +25,9 @@ class Home extends Component {
             <h1>Hello, world!</h1>
             <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
             <Row className="show-grid">
-              <Col xs={6} md={5}><Button bsSize="large" block bsStyle="primary">Learn more</Button></Col>
+              <Col xs={6} md={5}><Link className="btn btn-lg btn-primary btn-block" to="/search">Search a drug</Link></Col>
               <Col xsHidden md={2} className="space" />
-              <Col xs={6} md={5}><Button bsSize="large" block bsStyle="primary">Learn more</Button></Col>
+              <Col xs={6} md={5}><Link className="btn btn-lg btn-primary btn-block" to="/about">Learn more</Link></Col>
             </Row>
           </Jumbotron>
         </div>

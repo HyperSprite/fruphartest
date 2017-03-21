@@ -2920,16 +2920,44 @@ select[multiple].input-lg,
   background-color: #4183D7;
   border-color: #4183D7;
 }
-  .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
+  .btn-primary:hover,
+  /*.btn-primary:focus,
+  .btn-primary.focus,*/
+  .btn-primary:active,
+  .btn-primary.active,
+  .open > .btn-primary.dropdown-toggle {
     color: #fff;
     background-color: #F9B29D;
     border-color: #F9B29D;
   }
-  .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
-    background-image: none; }
-  .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
+  .btn-primary:active,
+  .btn-primary.active,
+  .open > .btn-primary.dropdown-toggle {
+    background-image: none;
+  }
+
+  .btn-primary.disabled,
+  .btn-primary.disabled:hover,
+  .btn-primary.disabled:focus,
+  .btn-primary.disabled.focus,
+  .btn-primary.disabled:active,
+  .btn-primary.disabled.active,
+  .btn-primary[disabled],
+  .btn-primary[disabled]:hover,
+  .btn-primary[disabled]:focus,
+  .btn-primary[disabled].focus,
+  .btn-primary[disabled]:active,
+  .btn-primary[disabled].active, fieldset[disabled]
+  .btn-primary, fieldset[disabled]
+  .btn-primary:hover, fieldset[disabled]
+  .btn-primary:focus, fieldset[disabled]
+  .btn-primary.focus, fieldset[disabled]
+  .btn-primary:active, fieldset[disabled]
+  .btn-primary.active {
     background-color: #4183D7;
-    border-color: #2c75d2; }
+    border-color: #2c75d2;
+  }
+
   .btn-primary .badge {
     color: #4183D7;
     background-color: #fff; }
@@ -4206,7 +4234,7 @@ a.badge:hover, a.badge:focus {
 }
   .jumbotron h1,
   .jumbotron .h1 {
-    color: inherit;
+    /*color: inherit;*/
     font-weight: 800;
   }
   .jumbotron p {

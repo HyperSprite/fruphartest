@@ -35,7 +35,7 @@ w1 - #fefefe
 }
 
 .inline-next > div > div > input {
-  font-size: 1.6em;
+  font-size: 1.4em;
 }
 
 .inline-next, .form-input-label > label {
@@ -46,11 +46,12 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 select.form-control {
-     border-top: 0;
-     border-right: 0;
-     border-left: 0;
-     -webkit-box-shadow: none;
-     box-shadow: none;
+  height: 1.4em;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 input[type="text"]:focus,
@@ -70,6 +71,12 @@ select.form-control:focus {
   display: flex;
   /*flex-wrap: wrap;*/
   justify-content: space-between;
+}
+
+.form-main {
+  background-color: rgba(255,255,255,0.5);
+  padding: 1em;
+  border-radius: 4px;
 }
 
 .form-left {
@@ -112,7 +119,6 @@ select.form-control:focus {
 
 .static-txt {
   margin-left: 1em;
-  /*font-size: 1.8em;*/
 }
 
 textarea:active,
@@ -139,6 +145,10 @@ label:focus,
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-image: url("../assets/background_image_with_overlay.jpg");
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: bottom center;
 }
 
 .site-main {
@@ -169,8 +179,13 @@ label:focus,
 
 .main {
   flex: 1 2 auto;
+  /*background-color: rgba(255,255,255,0.3);
+  padding: 1em;
+  border-radius: 4px;*/
   /*justify-content: center;*/
 }
+
+
 
 /*Navbar*/
 .navbar-brand {
@@ -206,11 +221,12 @@ label:focus,
 /*Jumbotron*/
 .jumbotron {
   margin-top: 10vh;
-  background-color: rgba(0,0,0,0.1);
-  /*background-color: initial;*/
+  /*background-color: rgba(0,0,0,0.1);*/
+  background-color: inherit;
 }
 
-.jumbotron button {
+.jumbotron button,
+.jumbotron a.btn-lg {
   font-size: 2em;
   font-weight: 600;
   margin-left: 0px;
@@ -219,9 +235,15 @@ label:focus,
   box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.6);
 }
 
+.jumbotron h1,
+.jumbotron p {
+  color: #fefefe;
+}
+
 .space {
   content: '\00a0';
 }
+
 
 /*Loading component*/
 .loading {

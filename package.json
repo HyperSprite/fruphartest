@@ -4,7 +4,7 @@
   "description": "redux-todo-app-with-mongo-backend",
   "main": "main.js",
   "engines": {
-    "node": "7.2.0"
+    "node": "8.1.4"
   },
   "repository": {
     "type": "git",
